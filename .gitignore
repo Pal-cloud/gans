@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+data/
+output_simple/
+output_images/
+.env
+node_modules/
+.next/
+webapp/.env.local
+webapp/.env.production
