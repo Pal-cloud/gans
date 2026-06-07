@@ -21,11 +21,11 @@
 
 ## 1. Introduccion conceptual sin codigo
 
-### Que es una GAN
+### Qué es una GAN
 
-Imagina que tienes dos personas trabajando juntas en un juego de engano continuo. Una de ellas es un falsificador de billetes: su objetivo es fabricar billetes tan convincentes que parezcan reales. La otra persona es un detective: su trabajo es distinguir si un billete es autentico o falsificado.
+Imagina que tienes dos personas trabajando juntas en un juego de engaño continuo. Una de ellas es un falsificador de billetes: su objetivo es fabricar billetes tan convincentes que parezcan reales. La otra persona es un detective: su trabajo es distinguir si un billete es autentico o falsificado.
 
-Al principio, el falsificador es muy malo en su trabajo y el detective lo detecta facilmente. Pero cada vez que el detective rechaza un billete, el falsificador aprende de ese error y mejora su tecnica. Del mismo modo, cada vez que el falsificador logra enganar al detective, el detective tambien aprende y se vuelve mas exigente.
+Al principio, el falsificador es muy malo en su trabajo y el detective lo detecta fácilmente. Pero cada vez que el detective rechaza un billete, el falsificador aprende de ese error y mejora su técnica. Del mismo modo, cada vez que el falsificador logra engañar al detective, el detective también aprende y se vuelve mas exigente.
 
 Este juego continua durante miles o millones de rondas. Al final, el falsificador se vuelve tan bueno que sus billetes son indistinguibles de los autenticos, y el detective es tan preciso que puede detectar errores casi imperceptibles.
 
@@ -33,37 +33,37 @@ Este es exactamente el principio de funcionamiento de una Red Generativa Adversa
 
 ### Los dos actores principales
 
-**El Generador** es el falsificador. Parte de ruido aleatorio (numeros al azar) y a traves de un proceso de aprendizaje, aprende a transformar ese ruido en datos que parecen reales: imagenes de caras humanas que nunca han existido, fragmentos de musica, textos coherentes, etcetera.
+**El Generador** es el falsificador. Parte de ruido aleatorio (numeros al azar) y a través de un proceso de aprendizaje, aprende a transformar ese ruido en datos que parecen reales: imágenes de caras humanas que nunca han existido, fragmentos de música, textos coherentes, etcétera.
 
-**El Discriminador** es el detective. Recibe dos tipos de muestras mezcladas: algunas provienen de datos reales (fotos reales de caras humanas, por ejemplo) y otras provienen del Generador. Su tarea es aprender a distinguir cuales son reales y cuales son falsas.
+**El Discriminador** es el detective. Recibe dos tipos de muestras mezcladas: algunas provienen de datos reales (fotos reales de caras humanas, por ejemplo) y otras provienen del Generador. Su tarea es aprender a distinguir cuáles son reales y cuáles son falsas.
 
-### Por que es revolucionario
+### Por qué es revolucionario
 
-Antes de las GANs, crear contenido sintetico de alta calidad era enormemente dificil. Los sistemas de inteligencia artificial podian clasificar o reconocer cosas, pero no eran buenos generando cosas nuevas. Las GANs cambiaron esto radicalmente al usar la competencia entre dos redes como mecanismo de aprendizaje.
+Antes de las GANs, crear contenido sintético de alta calidad era enormemente difícil. Los sistemas de inteligencia artificial podian clasificar o reconocer cosas, pero no eran buenos generando cosas nuevas. Las GANs cambiaron esto radicalmente al usar la competencia entre dos redes como mecanismo de aprendizaje.
 
 El resultado es que hoy en dia podemos generar:
 
-- Fotografias realistas de personas que no existen
-- Videos sinteticos con movimientos y expresiones naturales
-- Musica con estilos musicales especificos
-- Arte digital con tecnicas pictoricas concretas
-- Voz sintetica indistinguible de la voz humana
-- Datos medicos sinteticos para entrenar otros modelos sin violar privacidad
+- Fotografías realistas de personas que no existen
+- Vídeos sintéticos con movimientos y expresiones naturales
+- Música con estilos musicales específicos
+- Arte digital con técnicas pictoricas concretas
+- Voz sintética indistinguible de la voz humana
+- Datos médicos sintéticos para entrenar otros modelos sin violar privacidad
 
-### La metafora completa
+### La metáfora completa
 
-Piensa en la GAN como un proceso de forja artistica. Un maestro artesano (el Discriminador) ha visto miles de obras autenticas y sabe perfectamente como luce una obra genuina. Un aprendiz (el Generador) intenta crear obras nuevas bajo la supervision critica del maestro. Cada critica del maestro hace al aprendiz mejorar. Cuando el aprendiz es tan bueno que el maestro ya no puede distinguir sus obras de las originales, se ha alcanzado el equilibrio.
+Piensa en la GAN como un proceso de forja artística. Un maestro artesano (el Discriminador) ha visto miles de obras auténticas y sabe perfectamente cómo luce una obra genuina. Un aprendiz (el Generador) intenta crear obras nuevas bajo la supervisión crítica del maestro. Cada crítica del maestro hace al aprendiz mejorar. Cuando el aprendiz es tan bueno que el maestro ya no puede distinguir sus obras de las originales, se ha alcanzado el equilibrio.
 
 ---
 
-## 2. Como funcionan las GANs por dentro
+## 2. Cómo funcionan las GANs por dentro
 
 ### El ciclo de entrenamiento
 
-El entrenamiento de una GAN es un proceso ciclico que se repite durante muchas iteraciones:
+El entrenamiento de una GAN es un proceso cíclico que se repite durante muchas iteraciones:
 
 **Paso 1 - Entrenamiento del Discriminador:**
-Se le presentan muestras reales del conjunto de datos (por ejemplo, fotografias reales) y se le dice que son reales. Luego se le presentan muestras generadas por el Generador (fotografias falsas) y se le dice que son falsas. El Discriminador ajusta sus parametros internos para mejorar su capacidad de distincion.
+Se le presentan muestras reales del conjunto de datos (por ejemplo, fotografías reales) y se le dice que son reales. Luego se le presentan muestras generadas por el Generador (fotografías falsas) y se le dice que son falsas. El Discriminador ajusta sus parámetros internos para mejorar su capacidad de distinción.
 
 **Paso 2 - Entrenamiento del Generador:**
 El Generador produce muestras a partir de ruido aleatorio. Estas muestras pasan por el Discriminador, pero ahora el objetivo es que el Discriminador las clasifique como reales (aunque son falsas). El Generador ajusta sus parametros para enganar al Discriminador.
@@ -73,13 +73,13 @@ Este proceso se repite miles de veces. Con cada iteracion, ambas redes mejoran e
 
 ### El equilibrio de Nash
 
-El objetivo teorico de una GAN es alcanzar lo que en teoria de juegos se llama el equilibrio de Nash: un punto en el que ningun jugador puede mejorar su situacion cambiando unilateralmente su estrategia. En una GAN, esto ocurre cuando el Generador produce muestras tan buenas que el Discriminador ya no puede hacer nada mejor que adivinar al azar (50% de probabilidad de acertar). En la practica, este equilibrio es dificil de alcanzar y el entrenamiento puede ser inestable.
+El objetivo teórico de una GAN es alcanzar lo que en teoría de juegos se llama el equilibrio de Nash: un punto en el que ningun jugador puede mejorar su situacion cambiando unilateralmente su estrategia. En una GAN, esto ocurre cuando el Generador produce muestras tan buenas que el Discriminador ya no puede hacer nada mejor que adivinar al azar (50% de probabilidad de acertar). En la práctica, este equilibrio es difícil de alcanzar y el entrenamiento puede ser inestable.
 
 ### Problemas comunes durante el entrenamiento
 
-**Colapso de modo (Mode Collapse):** El Generador aprende a producir solo un tipo muy limitado de muestras porque estas enganan bien al Discriminador, ignorando la diversidad del conjunto de datos real.
+**Colapso de modo (Mode Collapse):** El Generador aprende a producir solo un tipo muy limitado de muestras porque estas engañan bien al Discriminador, ignorando la diversidad del conjunto de datos real.
 
-**Desvanecimiento del gradiente:** Si el Discriminador es demasiado bueno desde el principio, el Generador no recibe senal de aprendizaje suficiente y deja de mejorar.
+**Desvanecimiento del gradiente (tasa de cambio):** Si el Discriminador es demasiado bueno desde el principio, el Generador no recibe señal de aprendizaje suficiente y deja de mejorar.
 
 **Inestabilidad:** El entrenamiento puede oscilar sin converger a un resultado estable.
 
@@ -87,35 +87,35 @@ El objetivo teorico de una GAN es alcanzar lo que en teoria de juegos se llama e
 
 ## 3. Aplicaciones reales
 
-### Generacion de imagenes
+### Generación de imágenes
 
-Es el campo donde las GANs han tenido mayor impacto visible. El proyecto **ThisPersonDoesNotExist.com** muestra caras generadas por GANs que son indistinguibles de fotografias reales. Las arquitecturas como StyleGAN (desarrollada por NVIDIA) permiten controlar atributos especificos como la edad, el estilo del cabello o la expresion facial.
+Es el campo donde las GANs han tenido mayor impacto visible. El proyecto **https://ThisPersonDoesNotExist.com** muestra caras generadas por GANs que son indistinguibles de fotografias reales. Las arquitecturas como StyleGAN (desarrollada por NVIDIA) permiten controlar atributos específicos como la edad, el estilo del cabello o la expresión facial.
 
 Otras aplicaciones incluyen:
 
-- Transformacion de estilo artistico (convertir una fotografia en una pintura al oleo)
-- Aumento de resolucion de imagenes antiguas o de baja calidad (super-resolucion)
-- Transformacion de dia a noche o verano a invierno en fotografias
-- Generacion de imagenes medicas sinteticas (resonancias magneticas, tomografias)
+- Transformación de estilo artístico (convertir una fotografía en una pintura al óleo)
+- Aumento de resolución de imágenes antiguas o de baja calidad (super-resolución)
+- Transformación de día a noche o verano a invierno en fotografías
+- Generación de imágenes médicas sintéticas (resonancias magnéticas, tomografías)
 
-### Generacion de texto
+### Generación de texto
 
-Aunque los modelos de lenguaje grande (LLMs) como GPT han tomado protagonismo en la generacion de texto, las GANs tambien se han aplicado en este dominio con arquitecturas como TextGAN y SeqGAN. El reto principal es que el texto es discreto (palabras o caracteres concretos) mientras que las GANs funcionan mejor con datos continuos como pixeles de imagenes.
+Aunque los modelos de lenguaje grande (LLMs) como GPT han tomado protagonismo en la generacion de texto, las GANs también se han aplicado en este dominio con arquitecturas como TextGAN y SeqGAN. El reto principal es que el texto es discreto (palabras o carácteres concretos) mientras que las GANs funcionan mejor con datos continuos como píxeles de imágenes.
 
-Las aplicaciones incluyen generacion de resenas de productos, dialogos para videojuegos, y augmentacion de datos de texto para entrenar clasificadores.
+Las aplicaciones incluyen generación de reseñas de productos, diálogos para videojuegos, y augmentacion de datos de texto para entrenar clasificadores.
 
 ### Generacion de audio
 
-Las GANs se han aplicado con exito en:
+Las GANs se han aplicado con éxito en:
 
-- **Sintesis de voz:** WaveGAN y MelGAN generan audio de voz realista
-- **Generacion musical:** MuseGAN genera composiciones musicales en multiples instrumentos
-- **Conversion de voz:** Cambiar las caracteristicas de una voz (genero, acento) manteniendo el contenido
-- **Mejora de audio:** Eliminacion de ruido y mejora de calidad en grabaciones
+- **Síntesis de voz:** WaveGAN y MelGAN generan audio de voz realista
+- **Generación musical:** MuseGAN genera composiciones musicales en múltiples instrumentos
+- **Conversión de voz:** Cambiar las características de una voz (género, acento) manteniendo el contenido
+- **Mejora de audio:** Eliminación de ruido y mejora de calidad en grabaciones
 
 ---
 
-## 4. Implementacion en Python
+## 4. Implementación en Python
 
 ### Requisitos previos
 
@@ -123,13 +123,13 @@ Las GANs se han aplicado con exito en:
 pip install -r python/requirements.txt
 ```
 
-### Estructura de una GAN minima en PyTorch
+### Estructura de una GAN mínima en PyTorch
 
-El codigo completo y ejecutable se encuentra en `python/gan_simple.py`. A continuacion se explican los bloques principales:
+El código completo y ejecutable se encuentra en `python/gan_simple.py`. A continuacion se explican los bloques principales:
 
 **Arquitectura del Generador:**
 
-El Generador toma un vector de ruido de dimension fija (llamado espacio latente) y lo transforma en una muestra del tamano deseado. Cada capa aprende a darle estructura progresivamente mas compleja a ese ruido.
+El Generador toma un vector de ruido de dimensión fija (llamado espacio latente) y lo transforma en una muestra del tamañoo deseado. Cada capa aprende a darle estructura progresivamente más compleja a ese ruido.
 
 ```python
 class Generator(nn.Module):
