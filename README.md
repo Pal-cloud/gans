@@ -242,28 +242,28 @@ La generacion de texto con GANs presenta desafios unicos frente a la generacion 
 
 ### El problema de la discrecion
 
-Las imagenes son continuas: un pixel puede tomar cualquier valor entre 0 y 255, y una pequena perturbacion produce una imagen ligeramente diferente. El texto es discreto: no existe nada entre la palabra "gato" y la palabra "perro". Este problema hace que el gradiente no pueda fluir directamente del Discriminador al Generador a traves de las palabras generadas.
+Las imagenes son continuas: un pixel puede tomar cualquier valor entre 0 y 255, y una pequeña perturbación produce una imagen ligeramente diferente. El texto es discreto: no existe nada entre la palabra "gato" y la palabra "perro". Este problema hace que el gradiente no pueda fluir directamente del Discriminador al Generador a través de las palabras generadas.
 
 ### Soluciones propuestas
 
-**SeqGAN (2017):** Trata la generacion de texto como un proceso de toma de decisiones secuencial y usa tecnicas de aprendizaje por refuerzo (Monte Carlo Tree Search) para estimar el gradiente a traves de las palabras discretas.
+**SeqGAN (2017):** Trata la generación de texto como un proceso de toma de decisiones secuencial y usa tecnicas de aprendizaje por refuerzo (Monte Carlo Tree Search) para estimar el gradiente a través de las palabras discretas.
 
 **TextGAN:** Trabaja en el espacio de representaciones continuas (embeddings) en lugar de trabajar directamente con palabras discretas, lo que permite el flujo de gradiente.
 
 **BERT-GAN y variantes modernas:** Combinan la arquitectura Transformer con el esquema adversarial para mejorar la coherencia a largo plazo del texto generado.
 
-### Aplicaciones practicas en texto
+### Aplicaciones prácticas en texto
 
 - Augmentacion de datos: generar ejemplos adicionales de texto para clases poco representadas en un clasificador
-- Generacion de dialogos para videojuegos y asistentes virtuales
-- Anonimizacion de textos manteniendo el estilo y estructura
-- Generacion de resenas o descripciones de productos para pruebas de sistemas
+- Generación de diálogos para videojuegos y asistentes virtuales
+- Anonimización de textos manteniendo el estilo y estructura
+- Generación de reseñas o descripciones de productos para pruebas de sistemas
 
 ---
 
 ## 7. Uso en audios
 
-El audio comparte con las imagenes la caracteristica de ser datos continuos, pero presenta su propia complejidad temporal y frecuencial.
+El audio comparte con las imagenes la característica de ser datos continuos, pero presenta su propia complejidad temporal y frecuencial.
 
 ### Representaciones del audio para GANs
 
@@ -271,7 +271,7 @@ El audio puede introducirse en una GAN de dos formas principales:
 
 **Audio en bruto (forma de onda):** Se trabaja directamente con la secuencia de muestras de amplitud. WaveGAN es el pionero de este enfoque. Requiere manejar secuencias muy largas (44.100 muestras por segundo para audio de calidad CD).
 
-**Espectrograma:** Se convierte el audio en una representacion tiempo-frecuencia mediante la Transformada de Fourier de Tiempo Corto (STFT). Esto produce una imagen bidimensional que las GANs pueden procesar igual que cualquier imagen. MelGAN y HiFi-GAN utilizan espectrogramas Mel como representacion intermedia.
+**Espectrograma:** Se convierte el audio en una representación tiempo-frecuencia mediante la Transformada de Fourier de Tiempo Corto (STFT). Esto produce una imagen bidimensional que las GANs pueden procesar igual que cualquier imagen. MelGAN y HiFi-GAN utilizan espectrogramas Mel como representación intermedia.
 
 ### Arquitecturas especializadas
 
