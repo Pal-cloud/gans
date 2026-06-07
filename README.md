@@ -129,7 +129,7 @@ El código completo y ejecutable se encuentra en `python/gan_simple.py`. A conti
 
 **Arquitectura del Generador:**
 
-El Generador toma un vector de ruido de dimensión fija (llamado espacio latente) y lo transforma en una muestra del tamañoo deseado. Cada capa aprende a darle estructura progresivamente más compleja a ese ruido.
+El Generador toma un vector de ruido de dimensión fija (llamado espacio latente) y lo transforma en una muestra del tamaño deseado. Cada capa aprende a darle estructura progresivamente más compleja a ese ruido.
 
 ```python
 class Generator(nn.Module):
@@ -202,37 +202,37 @@ for epoch in range(num_epochs):
 
 ---
 
-## 5. Uso en imagenes
+## 5. Uso en imágenes
 
-Las imagenes son el dominio donde las GANs han alcanzado resultados mas espectaculares. El codigo en `python/gan_images.py` implementa una DCGAN (Deep Convolutional GAN) que entrena sobre el dataset MNIST para generar digitos escritos a mano.
+Las imágenes son el dominio donde las GANs han alcanzado resultados mas espectaculares. El código en `python/gan_images.py` implementa una DCGAN (Deep Convolutional GAN) que entrena sobre el dataset MNIST para generar dígitos escritos a mano.
 
-### Por que las imagenes se adaptan tan bien
+### Por qué las imágenes se adaptan tan bien
 
-Las imagenes son datos continuos (valores de pixeles entre 0 y 255) organizados en una estructura espacial regular. Esto las hace ideales para las GANs porque:
+Las imágenes son datos continuos (valores de píxeles entre 0 y 255) organizados en una estructura espacial regular. Esto las hace ideales para las GANs porque:
 
 - El Discriminador puede aprender patrones visuales locales mediante capas convolucionales
-- Las metricas de similitud son intuitivas (distancia de pixeles, coherencia de bordes)
+- Las métricas de similitud son intuitivas (distancia de píxeles, coherencia de bordes)
 - Los errores son visibles e interpretables por humanos durante el entrenamiento
 
-### DCGAN: la arquitectura estandar para imagenes
+### DCGAN: la arquitectura estándar para imágenes
 
-La DCGAN reemplaza las capas lineales por capas convolucionales y transpuestas. El Generador usa convoluciones transpuestas para aumentar progresivamente la resolucion desde el vector de ruido hasta la imagen final. El Discriminador usa convoluciones normales para reducir la imagen a una probabilidad.
+La DCGAN reemplaza las capas lineales por capas convolucionales y transpuestas. El Generador usa convoluciones transpuestas para aumentar progresivamente la resolución desde el vector de ruido hasta la imagen final. El Discriminador usa convoluciones normales para reducir la imagen a una probabilidad.
 
-Reglas clave de diseno de una DCGAN:
+Reglas clave de diseño de una DCGAN:
 
 - Usar Batch Normalization en todas las capas excepto la de entrada del Discriminador y la de salida del Generador
 - Usar LeakyReLU en el Discriminador y ReLU en el Generador
-- Usar Tanh como activacion de salida del Generador
+- Usar Tanh como activación de salida del Generador
 
-### Variantes importantes para imagenes
+### Variantes importantes para imágenes
 
-**Pix2Pix:** GAN condicionada que transforma imagenes de un dominio a otro. Por ejemplo, convierte bocetos en fotografias o mapas en imagenes satelite.
+**Pix2Pix:** GAN condicionada que transforma imágenes de un dominio a otro. Por ejemplo, convierte bocetos en fotografías o mapas en imágenes satélite.
 
-**CycleGAN:** Permite transformar imagenes entre dos dominios sin necesitar pares de imagenes de entrenamiento. Convierte fotografias de caballos en cebras, o verano en invierno.
+**CycleGAN:** Permite transformar imágenes entre dos dominios sin necesitar pares de imágenes de entrenamiento. Convierte fotografías de caballos en cebras, o verano en invierno.
 
-**StyleGAN2/3:** Arquitectura de NVIDIA que permite controlar el estilo de imagenes a diferentes escalas de detalle. Produce los resultados mas fotorrealistas conocidos.
+**StyleGAN2/3:** Arquitectura de NVIDIA que permite controlar el estilo de imágenes a diferentes escalas de detalle. Produce los resultados más fotorrealistas conocidos.
 
-**SRGAN:** Especializada en super-resolucion: tomar imagenes de baja resolucion y generar versiones de alta resolucion con detalles sinteticos plausibles.
+**SRGAN:** Especializada en super-resolución: tomar imágenes de baja resolución y generar versiones de alta resolución con detalles sintéticos plausibles.
 
 ---
 
