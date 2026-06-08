@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GANs - Redes Generativas Adversarias</title>
+  <title>GANs - Redes Generativas Adversarias | Pildora Formativa</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -170,6 +170,133 @@
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 1rem; color: var(--dim); font-size: .85rem; }
+
+    /* ── CALLOUT BOXES ── */
+    .callout {
+      display: flex; gap: 1rem; padding: 1rem 1.25rem;
+      border-radius: .85rem; margin: 1.25rem 0;
+      border-left: 3px solid;
+    }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+    .callout-body { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+    .callout-body strong { color: var(--text); }
+    .callout.tip    { background: rgba(5,150,105,.08);  border-color: var(--green);  }
+    .callout.warn   { background: rgba(217,119,6,.08);  border-color: var(--amber);  }
+    .callout.info   { background: rgba(37,99,235,.08);  border-color: var(--blue);   }
+    .callout.key    { background: rgba(124,58,237,.08); border-color: var(--violet); }
+
+    /* ── PROGRESS BAR (roadmap) ── */
+    .roadmap { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0; }
+    .road-item { display: flex; align-items: center; gap: 1rem; padding: .85rem 1.1rem; border-radius: .85rem; background: var(--bg2); border: 1px solid var(--border); font-size: .87rem; cursor: pointer; transition: border-color .2s; text-decoration: none; color: var(--text); }
+    .road-item:hover { border-color: var(--violet); }
+    .road-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(124,58,237,.2); color: var(--violet-l); font-size: .78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .road-title { font-weight: 600; }
+    .road-sub { color: var(--dim); font-size: .8rem; margin-top: .1rem; }
+    .road-arrow { margin-left: auto; color: var(--dim); }
+
+    /* ── CODE SECTION ── */
+    .code-tabs { display: flex; gap: .4rem; margin-bottom: 0; border-bottom: 1px solid var(--border); }
+    .code-tab {
+      padding: .5rem 1rem; font-size: .82rem; font-weight: 600; cursor: pointer;
+      border: none; background: transparent; color: var(--dim);
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: all .2s;
+    }
+    .code-tab.active { color: var(--violet-l); border-bottom-color: var(--violet); }
+    .code-panel { display: none; }
+    .code-panel.active { display: block; }
+
+    .code-wrap {
+      background: #0d1117; border: 1px solid var(--border); border-top: none;
+      border-radius: 0 0 .85rem .85rem; overflow-x: auto;
+    }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .6rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
+      font-size: .78rem; color: var(--dim);
+    }
+    .copy-btn {
+      padding: .2rem .6rem; border-radius: .4rem; border: 1px solid var(--border);
+      background: transparent; color: var(--dim); font-size: .75rem; cursor: pointer;
+      transition: all .2s;
+    }
+    .copy-btn:hover { border-color: var(--violet); color: var(--violet-l); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green-l); }
+
+    pre {
+      padding: 1.25rem 1.5rem;
+      font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: .82rem; line-height: 1.7;
+      overflow-x: auto; margin: 0;
+    }
+    /* Syntax highlight manual */
+    .kw  { color: #ff7b72; }   /* keywords */
+    .fn  { color: #d2a8ff; }   /* functions/classes */
+    .str { color: #a5d6ff; }   /* strings */
+    .cm  { color: #8b949e; font-style: italic; } /* comments */
+    .num { color: #f8cc6c; }   /* numbers */
+    .op  { color: #79c0ff; }   /* operators */
+    .var { color: #e6edf3; }   /* variables */
+
+    /* Console output */
+    .console-wrap {
+      background: #0d1117; border: 1px solid var(--border); border-radius: .85rem;
+      overflow: hidden; margin-top: 1.25rem;
+    }
+    .console-header {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .6rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
+      font-size: .78rem; color: var(--dim);
+    }
+    .console-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .console-body { padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: .8rem; line-height: 1.8; }
+    .c-dim  { color: #8b949e; }
+    .c-g    { color: var(--green-l); }
+    .c-b    { color: var(--blue-l); }
+    .c-v    { color: var(--violet-l); }
+    .c-a    { color: var(--amber-l); }
+
+    /* Annotation inline */
+    .line-ann {
+      display: inline-block; margin-left: 1rem;
+      font-size: .72rem; color: #8b949e; font-style: italic;
+    }
+
+    /* Schema flow */
+    .schema {
+      display: flex; align-items: center; gap: 0;
+      flex-wrap: wrap; margin: 1.5rem 0;
+    }
+    .schema-box {
+      padding: .6rem 1rem; border-radius: .65rem; font-size: .82rem; font-weight: 600;
+      border: 1px solid; text-align: center; min-width: 100px;
+    }
+    .schema-arrow { color: var(--dim); font-size: 1.2rem; padding: 0 .3rem; }
+    .schema-label { font-size: .7rem; font-weight: 400; display: block; margin-top: .15rem; opacity: .75; }
+    .s-violet { background: rgba(124,58,237,.15); border-color: var(--violet); color: var(--violet-l); }
+    .s-blue   { background: rgba(37,99,235,.15);  border-color: var(--blue);   color: var(--blue-l); }
+    .s-green  { background: rgba(5,150,105,.15);  border-color: var(--green);  color: var(--green-l); }
+    .s-amber  { background: rgba(217,119,6,.15);  border-color: var(--amber);  color: var(--amber-l); }
+    @media (max-width:640px) { .schema { flex-direction: column; align-items: flex-start; } .schema-arrow { transform: rotate(90deg); } }
+
+    /* Concept mini-cards in hero */
+    .concept-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; margin-top: 2rem; }
+    @media (max-width:600px) { .concept-grid { grid-template-columns: 1fr; } }
+    .concept-card { background: var(--bg2); border: 1px solid var(--border); border-radius: .85rem; padding: 1rem; text-align: left; }
+    .concept-card .cc-icon { font-size: 1.5rem; margin-bottom: .4rem; }
+    .concept-card .cc-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
+    .concept-card .cc-sub { font-size: .78rem; color: var(--dim); }
+
+    /* Glossary */
+    .glossary { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1rem; }
+    @media (max-width:580px) { .glossary { grid-template-columns: 1fr; } }
+    .gloss-item { background: var(--bg2); border: 1px solid var(--border); border-radius: .75rem; padding: .85rem 1rem; }
+    .gloss-term { font-size: .85rem; font-weight: 700; color: var(--violet-l); margin-bottom: .3rem; }
+    .gloss-def  { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* Section subtitle */
+    .section-sub { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin-bottom: .4rem; }
+    .section-desc { color: var(--muted); font-size: .95rem; margin-bottom: 2rem; max-width: 640px; }
   </style>
 </head>
 <body>
@@ -179,29 +306,58 @@
   <span class="logo">GANs</span>
   <a href="#concepto">Concepto</a>
   <a href="#arquitectura">Arquitectura</a>
+  <a href="#codigo">Codigo</a>
   <a href="#entrenamiento">Entrenamiento</a>
   <a href="#latente">Espacio latente</a>
   <a href="#dominios">Dominios</a>
 </nav>
 
 <!-- HERO -->
-<section id="hero" style="text-align:center; padding-top:100px; padding-bottom:100px;">
+<section id="hero" style="text-align:center; padding-top:100px; padding-bottom:80px;">
   <div class="badge">Pildora formativa interactiva</div>
   <h1>Redes <span class="gradient-text">Generativas Adversarias</span></h1>
-  <p style="max-width:540px; margin: 1rem auto 2rem; font-size:1.05rem;">
-    Aprende que son las GANs desde cero, sin necesidad de conocer programacion.
-    Explora los conceptos de forma visual e interactiva.
+  <p style="max-width:580px; margin: 1rem auto 0; font-size:1.05rem;">
+    Aprende que son las GANs desde cero y sin formulas. Conceptos visuales, codigo explicado
+    linea a linea y demostraciones interactivas en el navegador.
   </p>
-  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+
+  <div class="concept-grid" style="max-width:640px; margin: 2rem auto 0;">
+    <div class="concept-card">
+      <div class="cc-icon">&#127919;</div>
+      <div class="cc-title">Concepto primero</div>
+      <div class="cc-sub">La metafora del falsificador y el detective sin una sola formula</div>
+    </div>
+    <div class="concept-card">
+      <div class="cc-icon">&#128187;</div>
+      <div class="cc-title">Codigo despues</div>
+      <div class="cc-sub">Una GAN completa en 10 lineas de Python con cada linea anotada</div>
+    </div>
+    <div class="concept-card">
+      <div class="cc-icon">&#128270;</div>
+      <div class="cc-title">Experimenta</div>
+      <div class="cc-sub">Controla el espacio latente y observa el entrenamiento en tiempo real</div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2.5rem;">
     <a href="#concepto" class="btn btn-primary">Empezar a aprender</a>
-    <a href="#latente" class="btn btn-outline">Explorar interactivo</a>
+    <a href="#codigo" class="btn btn-outline">Ver el codigo</a>
   </div>
 </section>
 
 <!-- CONCEPTO -->
 <section id="concepto">
+  <p class="section-sub">Paso 1 de 6</p>
   <h2>Como funciona una GAN</h2>
-  <p>Sin codigo y sin matematicas. Sigue el ciclo paso a paso usando la metafora del falsificador y el detective.</p>
+  <p class="section-desc">Sin codigo y sin matematicas. Sigue el ciclo paso a paso usando la metafora del falsificador y el detective. Cada paso del ciclo corresponde a una operacion real del algoritmo.</p>
+
+  <div class="callout key">
+    <div class="callout-icon">&#128273;</div>
+    <div class="callout-body">
+      <strong>La idea central:</strong> dos redes neuronales compiten entre si. Una aprende a crear, la otra aprende a detectar.
+      La competencia es lo que hace que ambas mejoren sin necesidad de instrucciones explicitas sobre como hacerlo bien.
+    </div>
+  </div>
 
   <div class="steps" id="stepBtns"></div>
   <div class="step-content" id="stepContent">
@@ -214,12 +370,51 @@
     <span class="step-counter" id="stepCounter"></span>
     <button class="btn btn-outline btn-sm" id="nextBtn" onclick="changeStep(1)">Siguiente</button>
   </div>
+
+  <div style="margin-top:2.5rem;">
+    <h3>Glosario basico</h3>
+    <div class="glossary">
+      <div class="gloss-item">
+        <div class="gloss-term">Espacio latente (z)</div>
+        <div class="gloss-def">Vector de numeros aleatorios que sirve de "semilla" para el Generador. Cada punto del espacio latente corresponde a una muestra diferente.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Perdida (loss)</div>
+        <div class="gloss-def">Numero que mide lo mal que lo esta haciendo una red. El objetivo del entrenamiento es minimizarla ajustando los pesos internos.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Backpropagation</div>
+        <div class="gloss-def">Algoritmo que calcula cuanto ha contribuido cada peso al error y en que direccion hay que ajustarlo para reducirlo.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Equilibrio de Nash</div>
+        <div class="gloss-def">Punto teorico donde ninguno de los dos jugadores puede mejorar su resultado cambiando solo su propia estrategia. En una GAN: el Discriminador acierta el 50%.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Colapso de modo</div>
+        <div class="gloss-def">Fallo tipico: el Generador aprende a producir siempre la misma muestra porque engana al Discriminador, perdiendo diversidad.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Epoca (epoch)</div>
+        <div class="gloss-def">Una pasada completa por todo el conjunto de datos de entrenamiento. Un entrenamiento tipico requiere decenas o cientos de epocas.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ARQUITECTURA -->
 <section id="arquitectura">
+  <p class="section-sub">Paso 2 de 6</p>
   <h2>Arquitectura de una GAN</h2>
-  <p>Flujo de datos entre el Generador, el Discriminador y los datos reales.</p>
+  <p class="section-desc">Diagrama del flujo completo de datos. Cada flecha representa una operacion matematica; el color indica quien "posee" ese tramo del calculo.</p>
+
+  <div class="callout info">
+    <div class="callout-icon">&#128270;</div>
+    <div class="callout-body">
+      <strong>Como leer el diagrama:</strong> el flujo hacia la derecha es la pasada hacia adelante (forward pass): el Generador crea, el Discriminador evalua.
+      La flecha dorada vuelve hacia atras (backward pass): es el gradiente de error que le dice al Generador como mejorar.
+    </div>
+  </div>
 
   <div class="svg-wrap">
     <svg viewBox="0 0 760 280" style="width:100%; max-width:720px; display:block; margin:0 auto;">
@@ -274,10 +469,267 @@
   </div>
 </section>
 
+<!-- CODIGO -->
+<section id="codigo">
+  <p class="section-sub">Paso 3 de 6</p>
+  <h2>Una GAN en 10 lineas de codigo</h2>
+  <p class="section-desc">Todo el concepto que acabas de aprender se puede escribir en Python de forma muy compacta. Cada linea tiene su equivalente en la metafora del falsificador.</p>
+
+  <div class="callout tip">
+    <div class="callout-icon">&#128161;</div>
+    <div class="callout-body">
+      <strong>Como leer el codigo:</strong> no necesitas entender la sintaxis de Python en detalle. Lee los comentarios grises de cada linea: explican exactamente que esta pasando
+      en terminos del ciclo GAN que ya conoces.
+    </div>
+  </div>
+
+  <!-- Mini esquema del flujo -->
+  <h3 style="margin-bottom:.75rem; margin-top:1.5rem;">Esquema del flujo</h3>
+  <div class="schema">
+    <div class="schema-box s-violet">
+      Ruido z
+      <span class="schema-label">numeros aleatorios</span>
+    </div>
+    <div class="schema-arrow">&#8594;</div>
+    <div class="schema-box s-violet">
+      Generador G
+      <span class="schema-label">transforma el ruido</span>
+    </div>
+    <div class="schema-arrow">&#8594;</div>
+    <div class="schema-box s-blue">
+      Discriminador D
+      <span class="schema-label">evalua real/falso</span>
+    </div>
+    <div class="schema-arrow">&#8594;</div>
+    <div class="schema-box s-green">
+      Perdida
+      <span class="schema-label">mide el error</span>
+    </div>
+    <div class="schema-arrow">&#8594;</div>
+    <div class="schema-box s-amber">
+      Actualizacion
+      <span class="schema-label">mejora los pesos</span>
+    </div>
+  </div>
+
+  <!-- Pestanas de codigo -->
+  <div style="margin-top:1.75rem;">
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="showCode('full',this)">Codigo completo anotado</button>
+      <button class="code-tab" onclick="showCode('gen',this)">Solo el Generador</button>
+      <button class="code-tab" onclick="showCode('disc',this)">Solo el Discriminador</button>
+      <button class="code-tab" onclick="showCode('loop',this)">Solo el bucle</button>
+    </div>
+
+    <!-- Codigo completo -->
+    <div class="code-panel active" id="cp-full">
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>gan_minimal.py &mdash; Python 3 + PyTorch</span>
+          <button class="copy-btn" onclick="copyCode('full')">Copiar</button>
+        </div>
+        <pre id="src-full"><span class="kw">import</span> <span class="var">torch</span><span class="op">,</span> <span class="var">torch.nn</span> <span class="kw">as</span> <span class="var">nn</span>       <span class="line-ann"># libreria de redes neuronales</span>
+
+<span class="cm"># ── 1. GENERADOR: el falsificador ─────────────────────────────────</span>
+<span class="kw">class</span> <span class="fn">G</span>(<span class="var">nn.Module</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>()
+        <span class="var">self.net</span> <span class="op">=</span> <span class="var">nn.Sequential</span>(
+            <span class="var">nn.Linear</span>(<span class="num">100</span>, <span class="num">256</span>), <span class="var">nn.ReLU</span>(),   <span class="line-ann"># ruido -> espacio interno</span>
+            <span class="var">nn.Linear</span>(<span class="num">256</span>, <span class="num">784</span>), <span class="var">nn.Tanh</span>()    <span class="line-ann"># espacio interno -> imagen 28x28</span>
+        )
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="var">self</span>, <span class="var">z</span>): <span class="kw">return</span> <span class="var">self.net</span>(<span class="var">z</span>)
+
+<span class="cm"># ── 2. DISCRIMINADOR: el detective ────────────────────────────────</span>
+<span class="kw">class</span> <span class="fn">D</span>(<span class="var">nn.Module</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>()
+        <span class="var">self.net</span> <span class="op">=</span> <span class="var">nn.Sequential</span>(
+            <span class="var">nn.Linear</span>(<span class="num">784</span>, <span class="num">256</span>), <span class="var">nn.LeakyReLU</span>(<span class="num">0.2</span>),  <span class="line-ann"># imagen -> analisis</span>
+            <span class="var">nn.Linear</span>(<span class="num">256</span>, <span class="num">1</span>),   <span class="var">nn.Sigmoid</span>()        <span class="line-ann"># analisis -> prob. de ser real</span>
+        )
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="var">self</span>, <span class="var">x</span>): <span class="kw">return</span> <span class="var">self.net</span>(<span class="var">x</span>)
+
+<span class="cm"># ── 3. INSTANCIAR REDES Y OPTIMIZADORES ───────────────────────────</span>
+<span class="var">g</span>, <span class="var">d</span>   <span class="op">=</span> <span class="fn">G</span>(), <span class="fn">D</span>()
+<span class="var">opt_g</span> <span class="op">=</span> <span class="var">torch.optim.Adam</span>(<span class="var">g.parameters</span>(), <span class="var">lr</span><span class="op">=</span><span class="num">2e-4</span>)  <span class="line-ann"># optimizador del falsificador</span>
+<span class="var">opt_d</span> <span class="op">=</span> <span class="var">torch.optim.Adam</span>(<span class="var">d.parameters</span>(), <span class="var">lr</span><span class="op">=</span><span class="num">2e-4</span>)  <span class="line-ann"># optimizador del detective</span>
+<span class="var">loss</span>  <span class="op">=</span> <span class="var">nn.BCELoss</span>()                                 <span class="line-ann"># funcion de perdida binaria</span>
+
+<span class="cm"># ── 4. BUCLE DE ENTRENAMIENTO ─────────────────────────────────────</span>
+<span class="kw">for</span> <span class="var">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">50</span>):
+    <span class="cm"># -- Entrenar el Discriminador (el detective) --</span>
+    <span class="var">z</span>         <span class="op">=</span> <span class="var">torch.randn</span>(<span class="num">64</span>, <span class="num">100</span>)          <span class="line-ann"># 64 vectores de ruido aleatorio</span>
+    <span class="var">falso</span>     <span class="op">=</span> <span class="var">g</span>(<span class="var">z</span>).<span class="fn">detach</span>()                 <span class="line-ann"># generar sin propagar al G</span>
+    <span class="var">d_loss</span>    <span class="op">=</span> <span class="var">loss</span>(<span class="var">d</span>(<span class="var">real</span>), <span class="var">ones</span>) <span class="op">+</span> <span class="var">loss</span>(<span class="var">d</span>(<span class="var">falso</span>), <span class="var">zeros</span>)  <span class="line-ann"># detectar bien</span>
+    <span class="var">opt_d</span>.<span class="fn">zero_grad</span>(); <span class="var">d_loss</span>.<span class="fn">backward</span>(); <span class="var">opt_d</span>.<span class="fn">step</span>()
+
+    <span class="cm"># -- Entrenar el Generador (el falsificador) --</span>
+    <span class="var">z</span>         <span class="op">=</span> <span class="var">torch.randn</span>(<span class="num">64</span>, <span class="num">100</span>)          <span class="line-ann"># nuevo ruido</span>
+    <span class="var">g_loss</span>    <span class="op">=</span> <span class="var">loss</span>(<span class="var">d</span>(<span class="var">g</span>(<span class="var">z</span>)), <span class="var">ones</span>)            <span class="line-ann"># enganar al detective</span>
+    <span class="var">opt_g</span>.<span class="fn">zero_grad</span>(); <span class="var">g_loss</span>.<span class="fn">backward</span>(); <span class="var">opt_g</span>.<span class="fn">step</span>()</pre>
+      </div>
+    </div>
+
+    <!-- Solo Generador -->
+    <div class="code-panel" id="cp-gen">
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>Generador &mdash; el falsificador</span>
+          <button class="copy-btn" onclick="copyCode('gen')">Copiar</button>
+        </div>
+        <pre id="src-gen"><span class="cm"># El Generador transforma RUIDO en una MUESTRA sintetica.</span>
+<span class="cm"># Entrada: vector z de 100 numeros aleatorios (espacio latente)</span>
+<span class="cm"># Salida:  vector de 784 valores = imagen 28x28 aplanada</span>
+
+<span class="kw">class</span> <span class="fn">Generator</span>(<span class="var">nn.Module</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>()
+        <span class="var">self.net</span> <span class="op">=</span> <span class="var">nn.Sequential</span>(
+            <span class="cm"># Capa 1: expande el ruido a un espacio mas rico</span>
+            <span class="var">nn.Linear</span>(<span class="num">100</span>, <span class="num">256</span>),
+            <span class="var">nn.ReLU</span>(),          <span class="line-ann"># activa solo valores positivos</span>
+
+            <span class="cm"># Capa 2: proyecta al tamano de la imagen</span>
+            <span class="var">nn.Linear</span>(<span class="num">256</span>, <span class="num">784</span>),
+            <span class="var">nn.Tanh</span>()           <span class="line-ann"># normaliza salida entre -1 y 1</span>
+        )
+
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="var">self</span>, <span class="var">z</span>):
+        <span class="kw">return</span> <span class="var">self.net</span>(<span class="var">z</span>)   <span class="line-ann"># aplicar todas las capas en orden</span>
+
+<span class="cm"># Uso:</span>
+<span class="var">g</span> <span class="op">=</span> <span class="fn">Generator</span>()
+<span class="var">z</span> <span class="op">=</span> <span class="var">torch.randn</span>(<span class="num">1</span>, <span class="num">100</span>)   <span class="line-ann"># un vector de ruido</span>
+<span class="var">imagen</span> <span class="op">=</span> <span class="var">g</span>(<span class="var">z</span>)               <span class="line-ann"># una imagen sintetica 28x28</span></pre>
+      </div>
+    </div>
+
+    <!-- Solo Discriminador -->
+    <div class="code-panel" id="cp-disc">
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>Discriminador &mdash; el detective</span>
+          <button class="copy-btn" onclick="copyCode('disc')">Copiar</button>
+        </div>
+        <pre id="src-disc"><span class="cm"># El Discriminador decide si una imagen es REAL o GENERADA.</span>
+<span class="cm"># Entrada: vector de 784 valores = imagen 28x28 aplanada</span>
+<span class="cm"># Salida:  un numero entre 0 (falso) y 1 (real)</span>
+
+<span class="kw">class</span> <span class="fn">Discriminator</span>(<span class="var">nn.Module</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>()
+        <span class="var">self.net</span> <span class="op">=</span> <span class="var">nn.Sequential</span>(
+            <span class="cm"># Capa 1: analiza las caracteristicas de la imagen</span>
+            <span class="var">nn.Linear</span>(<span class="num">784</span>, <span class="num">256</span>),
+            <span class="var">nn.LeakyReLU</span>(<span class="num">0.2</span>),   <span class="line-ann"># permite gradiente negativo pequeno</span>
+            <span class="var">nn.Dropout</span>(<span class="num">0.3</span>),      <span class="line-ann"># evita sobreajuste apagando neuronas</span>
+
+            <span class="cm"># Capa 2: decision final</span>
+            <span class="var">nn.Linear</span>(<span class="num">256</span>, <span class="num">1</span>),
+            <span class="var">nn.Sigmoid</span>()           <span class="line-ann"># comprime a rango [0, 1]</span>
+        )
+
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="var">self</span>, <span class="var">x</span>):
+        <span class="kw">return</span> <span class="var">self.net</span>(<span class="var">x</span>)   <span class="line-ann"># aplicar todas las capas en orden</span>
+
+<span class="cm"># Uso:</span>
+<span class="var">d</span> <span class="op">=</span> <span class="fn">Discriminator</span>()
+<span class="var">prob</span> <span class="op">=</span> <span class="var">d</span>(<span class="var">imagen_real</span>)    <span class="line-ann"># deberia devolver ~1.0</span>
+<span class="var">prob</span> <span class="op">=</span> <span class="var">d</span>(<span class="var">imagen_falsa</span>)   <span class="line-ann"># deberia devolver ~0.0 al inicio</span></pre>
+      </div>
+    </div>
+
+    <!-- Solo bucle -->
+    <div class="code-panel" id="cp-loop">
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>Bucle de entrenamiento &mdash; el corazon del algoritmo</span>
+          <button class="copy-btn" onclick="copyCode('loop')">Copiar</button>
+        </div>
+        <pre id="src-loop"><span class="cm"># Este bucle se repite 50 veces (50 epocas).</span>
+<span class="cm"># En cada epoca, el D y el G se turnan para mejorar.</span>
+
+<span class="kw">for</span> <span class="var">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">50</span>):
+    <span class="kw">for</span> <span class="var">imagenes_reales</span> <span class="kw">in</span> <span class="var">dataloader</span>:   <span class="line-ann"># recorrer datos reales por lotes</span>
+
+        <span class="cm"># ── TURNO DEL DISCRIMINADOR (el detective) ──────────────</span>
+        <span class="var">z</span>     <span class="op">=</span> <span class="var">torch.randn</span>(<span class="num">64</span>, <span class="num">100</span>)         <span class="line-ann"># ruido para el generador</span>
+        <span class="var">falsas</span> <span class="op">=</span> <span class="var">g</span>(<span class="var">z</span>).<span class="fn">detach</span>()              <span class="line-ann"># generar sin afectar al G</span>
+
+        <span class="cm"># perdida = error al clasificar reales + error al clasificar falsas</span>
+        <span class="var">d_loss</span> <span class="op">=</span> (<span class="var">loss</span>(<span class="var">d</span>(<span class="var">imagenes_reales</span>), <span class="var">ones</span>)
+                 <span class="op">+</span> <span class="var">loss</span>(<span class="var">d</span>(<span class="var">falsas</span>), <span class="var">zeros</span>)) <span class="op">/</span> <span class="num">2</span>
+
+        <span class="var">opt_d</span>.<span class="fn">zero_grad</span>()    <span class="line-ann"># limpiar gradientes anteriores</span>
+        <span class="var">d_loss</span>.<span class="fn">backward</span>()    <span class="line-ann"># calcular nuevos gradientes</span>
+        <span class="var">opt_d</span>.<span class="fn">step</span>()          <span class="line-ann"># actualizar pesos del D</span>
+
+        <span class="cm"># ── TURNO DEL GENERADOR (el falsificador) ───────────────</span>
+        <span class="var">z</span>      <span class="op">=</span> <span class="var">torch.randn</span>(<span class="num">64</span>, <span class="num">100</span>)        <span class="line-ann"># nuevo ruido</span>
+        <span class="var">falsas</span> <span class="op">=</span> <span class="var">g</span>(<span class="var">z</span>)
+
+        <span class="cm"># el G quiere que D clasifique sus falsas como reales (ones)</span>
+        <span class="var">g_loss</span> <span class="op">=</span> <span class="var">loss</span>(<span class="var">d</span>(<span class="var">falsas</span>), <span class="var">ones</span>)
+
+        <span class="var">opt_g</span>.<span class="fn">zero_grad</span>()    <span class="line-ann"># limpiar gradientes anteriores</span>
+        <span class="var">g_loss</span>.<span class="fn">backward</span>()    <span class="line-ann"># calcular nuevos gradientes</span>
+        <span class="var">opt_g</span>.<span class="fn">step</span>()          <span class="line-ann"># actualizar pesos del G</span>
+
+    <span class="fn">print</span>(<span class="var">f</span><span class="str">"Epoca {epoch+1} | D: {d_loss:.3f} | G: {g_loss:.3f}"</span>)</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Console output simulado -->
+  <div class="console-wrap">
+    <div class="console-header">
+      <div class="console-dot" style="background:#ff5f56"></div>
+      <div class="console-dot" style="background:#ffbd2e"></div>
+      <div class="console-dot" style="background:#27c93f"></div>
+      <span style="margin-left:.5rem;">Salida de consola simulada &mdash; python gan_minimal.py</span>
+    </div>
+    <div class="console-body">
+      <div class="c-dim">Descargando MNIST... 60.000 imagenes de entrenamiento</div>
+      <div class="c-dim">Iniciando entrenamiento en CPU</div>
+      <div style="margin:.5rem 0 .2rem; border-top: 1px solid #21262d;"></div>
+      <div><span class="c-dim">Epoca  1 |</span> <span class="c-b">D: 0.693</span> <span class="c-dim">|</span> <span class="c-v">G: 0.701</span> <span class="c-dim">&mdash; inicio: ambas redes partiendo de cero</span></div>
+      <div><span class="c-dim">Epoca  5 |</span> <span class="c-b">D: 0.541</span> <span class="c-dim">|</span> <span class="c-v">G: 1.124</span> <span class="c-dim">&mdash; D aprende rapido, G empieza a adaptarse</span></div>
+      <div><span class="c-dim">Epoca 10 |</span> <span class="c-b">D: 0.482</span> <span class="c-dim">|</span> <span class="c-v">G: 1.532</span> <span class="c-dim">&mdash; G sube su perdida al intentar enganar a D</span></div>
+      <div><span class="c-dim">Epoca 20 |</span> <span class="c-b">D: 0.431</span> <span class="c-dim">|</span> <span class="c-v">G: 1.201</span> <span class="c-dim">&mdash; ambas redes mejoran progresivamente</span></div>
+      <div><span class="c-dim">Epoca 30 |</span> <span class="c-b">D: 0.398</span> <span class="c-dim">|</span> <span class="c-v">G: 1.087</span> <span class="c-dim">&mdash; perdidas convergiendo hacia equilibrio</span></div>
+      <div><span class="c-dim">Epoca 40 |</span> <span class="c-b">D: 0.371</span> <span class="c-dim">|</span> <span class="c-v">G: 0.974</span></div>
+      <div><span class="c-dim">Epoca 50 |</span> <span class="c-b">D: 0.356</span> <span class="c-dim">|</span> <span class="c-v">G: 0.921</span> <span class="c-dim">&mdash; convergencia aceptable, imagenes coherentes</span></div>
+      <div style="margin:.5rem 0 .2rem; border-top: 1px solid #21262d;"></div>
+      <div class="c-g">Entrenamiento completado en 4m 32s</div>
+      <div class="c-g">Imagenes guardadas en ./output/epoch_050.png</div>
+      <div class="c-a" style="margin-top:.5rem;">Interpretacion: D cercano a 0.5 = Discriminador adivinando al azar = buen equilibrio</div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:1.5rem;">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body">
+      <strong>Recuerda:</strong> este codigo es didactico, no de produccion. Un entrenamiento real sobre datos complejos
+      (caras, arte, audio) requiere arquitecturas convolucionales mas profundas, GPUs y horas de computo.
+      El fichero <code>python/gan_images.py</code> del repositorio contiene la version DCGAN completa y ejecutable.
+    </div>
+  </div>
+</section>
+
 <!-- ENTRENAMIENTO -->
 <section id="entrenamiento">
+  <p class="section-sub">Paso 4 de 6</p>
   <h2>Animacion del entrenamiento</h2>
-  <p>Observa como evolucionan las perdidas y la calidad de las muestras generadas a lo largo de las epocas.</p>
+  <p class="section-desc">Reproduce el entrenamiento epoca a epoca. Observa como la calidad de las imagenes generadas mejora y como las curvas de perdida convergen hacia el equilibrio.</p>
+
+  <div class="callout info">
+    <div class="callout-icon">&#128202;</div>
+    <div class="callout-body">
+      <strong>Que mirar:</strong> al principio la perdida del Generador es alta (D lo detecta facilmente).
+      Con el tiempo ambas curvas se estabilizan y se aproximan. Cuando D tiene perdida ~0.5 significa que acierta solo por azar: el equilibrio se ha alcanzado.
+    </div>
+  </div>
 
   <div class="training-wrap">
     <div>
@@ -318,8 +770,17 @@
 
 <!-- ESPACIO LATENTE -->
 <section id="latente">
+  <p class="section-sub">Paso 5 de 6</p>
   <h2>Explorador del espacio latente</h2>
-  <p>Mueve los controles para cambiar los parametros del vector de ruido y observa como varia la muestra generada en tiempo real.</p>
+  <p class="section-desc">Mueve los controles para cambiar los parametros del vector de ruido z y observa como varia la muestra en tiempo real. Cada dimension controla un atributo diferente.</p>
+
+  <div class="callout tip">
+    <div class="callout-icon">&#128101;</div>
+    <div class="callout-body">
+      <strong>Conexion con la metafora:</strong> este vector z es exactamente el "papel en blanco" del que parte el falsificador.
+      Cada posicion del vector influye en como sera la muestra generada, igual que la calidad del papel influye en el resultado final del billete.
+    </div>
+  </div>
 
   <div class="latent-wrap">
     <div>
@@ -345,8 +806,9 @@
 
 <!-- DOMINIOS -->
 <section id="dominios">
+  <p class="section-sub">Paso 6 de 6</p>
   <h2>Dominios de aplicacion</h2>
-  <p>Las GANs se han aplicado a tres grandes dominios con arquitecturas especificas para cada uno.</p>
+  <p class="section-desc">Las GANs no son una sola tecnica: son una familia de arquitecturas adaptadas a cada tipo de dato. Imagenes, texto y audio requieren enfoques distintos.</p>
 
   <div class="tabs">
     <button class="tab-btn active-violet" onclick="showTab('images',this)" id="tab-images">Imagenes</button>
@@ -669,6 +1131,27 @@ function toggleLatentAnim() {
 
 buildSliders();
 drawLatent();
+
+/* ─────────────────────────────────────────
+   CODE TABS
+───────────────────────────────────────── */
+function showCode(id, btn) {
+  document.querySelectorAll(".code-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".code-tab").forEach(b => b.classList.remove("active"));
+  document.getElementById("cp-" + id).classList.add("active");
+  btn.classList.add("active");
+}
+
+function copyCode(id) {
+  const el  = document.getElementById("src-" + id);
+  const txt = el ? el.innerText : "";
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = event.target;
+    btn.textContent = "Copiado";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copiar"; btn.classList.remove("copied"); }, 1800);
+  });
+}
 
 /* ─────────────────────────────────────────
    DOMAIN TABS
