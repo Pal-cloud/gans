@@ -1,9 +1,14 @@
-import Hero from "@/components/Hero";
-import ConceptExplainer from "@/components/ConceptExplainer";
-import Architecture from "@/components/Architecture";
-import TrainingAnimation from "@/components/TrainingAnimation";
-import LatentSpaceExplorer from "@/components/LatentSpaceExplorer";
-import DomainShowcase from "@/components/DomainShowcase";
+import dynamic from "next/dynamic";
+
+// Todos los componentes interactivos se cargan exclusivamente en el cliente
+// (ssr: false) para evitar discrepancias de hidratacion entre servidor y cliente
+// que causan el error "Missing ActionQueueContext" del Router de Next.js.
+const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+const ConceptExplainer = dynamic(() => import("@/components/ConceptExplainer"), { ssr: false });
+const Architecture = dynamic(() => import("@/components/Architecture"), { ssr: false });
+const TrainingAnimation = dynamic(() => import("@/components/TrainingAnimation"), { ssr: false });
+const LatentSpaceExplorer = dynamic(() => import("@/components/LatentSpaceExplorer"), { ssr: false });
+const DomainShowcase = dynamic(() => import("@/components/DomainShowcase"), { ssr: false });
 
 export default function Home() {
   return (
