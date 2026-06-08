@@ -319,13 +319,29 @@ Un diagrama animado que muestra el recorrido de los datos a través del Generado
 
 ### Iniciar la aplicacion en local
 
+Desde la raiz del repositorio, ejecutar los siguientes comandos en orden:
+
 ```bash
+# 1. Entrar en la carpeta de la aplicacion web
 cd webapp
+
+# 2. Instalar todas las dependencias del proyecto (solo la primera vez,
+#    o cuando se actualice package.json)
 npm install
+
+# 3. Arrancar el servidor de desarrollo con recarga automatica
 npm run dev
 ```
 
+Explicacion de cada comando:
+
+- `cd webapp` — cambia el directorio de trabajo a la carpeta donde esta la aplicacion. Es imprescindible ejecutar los siguientes comandos desde ahi, no desde la raiz del repositorio.
+- `npm install` — lee el fichero `package.json` y descarga todas las librerias necesarias dentro de la carpeta `node_modules/`. Solo hace falta ejecutarlo la primera vez o tras actualizar dependencias.
+- `npm run dev` — arranca Next.js en modo desarrollo. Cada vez que se guarda un fichero, la pagina se refresca automaticamente en el navegador sin necesidad de reiniciar el servidor.
+
 La aplicacion estara disponible en `http://localhost:3000`.
+
+Para detener el servidor en cualquier momento, pulsar `Ctrl + C` en la terminal donde esta corriendo.
 
 ---
 
