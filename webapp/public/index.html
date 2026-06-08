@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GANs - Redes Generativas Adversarias</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #020617;
+      --bg2:      #0f172a;
+      --bg3:      #1e293b;
+      --border:   #334155;
+      --text:     #f1f5f9;
+      --muted:    #94a3b8;
+      --dim:      #64748b;
+      --violet:   #7c3aed;
+      --violet-l: #a78bfa;
+      --blue:     #2563eb;
+      --blue-l:   #93c5fd;
+      --cyan:     #0891b2;
+      --cyan-l:   #67e8f9;
+      --amber:    #d97706;
+      --amber-l:  #fcd34d;
+      --green:    #059669;
+      --green-l:  #6ee7b7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(2,6,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; gap: 2rem;
+      height: 56px;
+    }
+    nav .logo { font-weight: 700; color: var(--violet-l); font-size: 1rem; white-space: nowrap; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    nav a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
+    section + section { border-top: 1px solid var(--border); }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: .5rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: .75rem; color: var(--violet-l); }
+    p  { color: var(--muted); margin-bottom: 1rem; }
+    ul { color: var(--muted); padding-left: 1.4rem; margin-bottom: 1rem; }
+    li { margin-bottom: .3rem; }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .6rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 600;
+      background: rgba(124,58,237,.2); color: var(--violet-l);
+      border: 1px solid rgba(124,58,237,.4);
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--violet-l), var(--blue-l), var(--cyan-l));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .btn {
+      display: inline-block; padding: .75rem 1.75rem;
+      border-radius: .75rem; font-weight: 600; font-size: .9rem;
+      cursor: pointer; transition: all .2s; border: none;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--violet); color: #fff; }
+    .btn-primary:hover { background: #6d28d9; }
+    .btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--muted); color: var(--text); }
+    .btn-sm { padding: .45rem 1rem; font-size: .82rem; border-radius: .6rem; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+    .card + .card { margin-top: 1rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── STEP EXPLAINER ── */
+    .steps { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .step-btn {
+      padding: .4rem .9rem; border-radius: .6rem; font-size: .82rem; font-weight: 600;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--dim); cursor: pointer; transition: all .2s;
+    }
+    .step-btn.active { border-color: var(--violet); background: rgba(124,58,237,.15); color: var(--violet-l); }
+    .step-content { border-radius: 1rem; border: 1px solid var(--violet); background: rgba(124,58,237,.08); padding: 1.5rem; }
+    .step-content .metaphor { margin-top: 1rem; padding: 1rem; border-radius: .75rem; background: var(--bg3); border: 1px solid var(--border); font-style: italic; color: var(--muted); }
+    .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+    .step-counter { color: var(--dim); font-size: .85rem; }
+
+    /* ── ARCHITECTURE SVG ── */
+    .svg-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; overflow-x: auto; }
+    .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--muted); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── TRAINING ANIMATION ── */
+    .training-wrap { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
+    @media (max-width: 640px) { .training-wrap { grid-template-columns: 1fr; } }
+    canvas { border-radius: .75rem; border: 1px solid var(--border); display: block; image-rendering: pixelated; }
+    .canvas-label { font-size: .75rem; color: var(--dim); margin-top: .5rem; text-align: center; }
+    .controls { display: flex; gap: .5rem; margin-top: .75rem; justify-content: center; flex-wrap: wrap; }
+    .progress-wrap { margin-top: .75rem; }
+    input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; }
+    .epoch-info { display: flex; justify-content: space-between; font-size: .75rem; color: var(--dim); margin-top: .25rem; }
+
+    .loss-chart-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; }
+    .loss-chart-wrap p { font-size: .85rem; color: var(--text); margin-bottom: .75rem; }
+    .loss-legend { display: flex; gap: 1rem; margin-top: .75rem; font-size: .78rem; color: var(--muted); }
+    .loss-legend span { display: flex; align-items: center; gap: .4rem; }
+    .line-d { display: inline-block; width: 20px; height: 3px; background: var(--blue-l); border-radius: 2px; }
+    .line-g { display: inline-block; width: 20px; height: 3px; background: var(--violet-l); border-radius: 2px; }
+    .phase-label { margin-top: .75rem; padding: .6rem .9rem; border-radius: .6rem; background: var(--bg3); border: 1px solid var(--border); font-size: .78rem; color: var(--dim); }
+
+    /* ── LATENT EXPLORER ── */
+    .latent-wrap { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
+    @media (max-width: 640px) { .latent-wrap { grid-template-columns: 1fr; } }
+    .canvas-box { position: relative; display: inline-block; }
+    .canvas-overlay { position: absolute; top: .5rem; left: .5rem; background: rgba(15,23,42,.8); padding: .2rem .5rem; border-radius: .4rem; font-size: .72rem; color: var(--muted); }
+    .slider-row { margin-bottom: 1rem; }
+    .slider-row label { display: flex; justify-content: space-between; font-size: .82rem; color: var(--text); margin-bottom: .3rem; }
+    .slider-row label span { color: var(--violet-l); font-family: monospace; }
+    .vector-display { font-family: monospace; font-size: .78rem; color: var(--dim); margin-bottom: 1rem; }
+    .info-box { padding: .75rem 1rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); font-size: .78rem; color: var(--dim); line-height: 1.5; margin-top: 1rem; }
+
+    /* ── DOMAIN TABS ── */
+    .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
+    .tab-btn {
+      flex: 1; padding: .65rem; border-radius: .75rem; font-size: .85rem; font-weight: 600;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--dim); cursor: pointer; transition: all .2s;
+    }
+    .tab-btn.active-violet { border-color: var(--violet); background: rgba(124,58,237,.15); color: var(--violet-l); }
+    .tab-btn.active-blue   { border-color: var(--blue);   background: rgba(37,99,235,.15);  color: var(--blue-l); }
+    .tab-btn.active-cyan   { border-color: var(--cyan);   background: rgba(8,145,178,.15);  color: var(--cyan-l); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .arch-item { display: flex; gap: .75rem; padding: .75rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); margin-bottom: .6rem; }
+    .arch-name { flex-shrink: 0; padding: .15rem .5rem; border-radius: .4rem; font-size: .75rem; font-weight: 700; background: rgba(124,58,237,.2); color: var(--violet-l); }
+    .arch-name.blue { background: rgba(37,99,235,.2); color: var(--blue-l); }
+    .arch-name.cyan { background: rgba(8,145,178,.2); color: var(--cyan-l); }
+    .arch-desc { font-size: .82rem; color: var(--muted); }
+    .challenge-item { display: flex; gap: .75rem; padding: .75rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); margin-bottom: .6rem; }
+    .challenge-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); color: var(--muted); font-size: .75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 1rem; color: var(--dim); font-size: .85rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">GANs</span>
+  <a href="#concepto">Concepto</a>
+  <a href="#arquitectura">Arquitectura</a>
+  <a href="#entrenamiento">Entrenamiento</a>
+  <a href="#latente">Espacio latente</a>
+  <a href="#dominios">Dominios</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="text-align:center; padding-top:100px; padding-bottom:100px;">
+  <div class="badge">Pildora formativa interactiva</div>
+  <h1>Redes <span class="gradient-text">Generativas Adversarias</span></h1>
+  <p style="max-width:540px; margin: 1rem auto 2rem; font-size:1.05rem;">
+    Aprende que son las GANs desde cero, sin necesidad de conocer programacion.
+    Explora los conceptos de forma visual e interactiva.
+  </p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <a href="#concepto" class="btn btn-primary">Empezar a aprender</a>
+    <a href="#latente" class="btn btn-outline">Explorar interactivo</a>
+  </div>
+</section>
+
+<!-- CONCEPTO -->
+<section id="concepto">
+  <h2>Como funciona una GAN</h2>
+  <p>Sin codigo y sin matematicas. Sigue el ciclo paso a paso usando la metafora del falsificador y el detective.</p>
+
+  <div class="steps" id="stepBtns"></div>
+  <div class="step-content" id="stepContent">
+    <h3 id="stepTitle"></h3>
+    <p id="stepDesc"></p>
+    <div class="metaphor" id="stepMeta"></div>
+  </div>
+  <div class="step-nav">
+    <button class="btn btn-outline btn-sm" id="prevBtn" onclick="changeStep(-1)">Anterior</button>
+    <span class="step-counter" id="stepCounter"></span>
+    <button class="btn btn-outline btn-sm" id="nextBtn" onclick="changeStep(1)">Siguiente</button>
+  </div>
+</section>
+
+<!-- ARQUITECTURA -->
+<section id="arquitectura">
+  <h2>Arquitectura de una GAN</h2>
+  <p>Flujo de datos entre el Generador, el Discriminador y los datos reales.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 760 280" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+      <defs>
+        <marker id="av" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7c3aed"/></marker>
+        <marker id="ai" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#818cf8"/></marker>
+        <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#059669"/></marker>
+        <marker id="ab" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/></marker>
+        <marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#d97706"/></marker>
+      </defs>
+      <!-- Ruido -->
+      <rect x="10" y="105" width="110" height="60" rx="10" fill="#1e1b4b" stroke="#6d28d9" stroke-width="1.5"/>
+      <text x="65" y="130" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="600">Espacio</text>
+      <text x="65" y="148" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="600">Latente (z)</text>
+      <!-- Flecha ruido->G -->
+      <path d="M120 135 L165 135" stroke="#6d28d9" stroke-width="1.5" marker-end="url(#av)"/>
+      <!-- Generador -->
+      <rect x="165" y="85" width="130" height="100" rx="12" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+      <text x="230" y="127" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700">GENERADOR</text>
+      <text x="230" y="145" text-anchor="middle" fill="#7c3aed" font-size="10">G(z)</text>
+      <text x="230" y="162" text-anchor="middle" fill="#475569" font-size="9">Red Neuronal</text>
+      <!-- Flecha G->D -->
+      <path d="M295 135 L360 135" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ai)"/>
+      <text x="328" y="127" text-anchor="middle" fill="#64748b" font-size="9">Muestra</text>
+      <text x="328" y="139" text-anchor="middle" fill="#64748b" font-size="9">generada</text>
+      <!-- Datos reales -->
+      <rect x="360" y="18" width="120" height="52" rx="10" fill="#052e16" stroke="#059669" stroke-width="1.5"/>
+      <text x="420" y="40" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Datos</text>
+      <text x="420" y="57" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Reales</text>
+      <!-- Flecha datos->D -->
+      <path d="M420 70 L420 95" stroke="#059669" stroke-width="1.5" marker-end="url(#ag)"/>
+      <!-- Discriminador -->
+      <rect x="360" y="85" width="130" height="100" rx="12" fill="#172554" stroke="#2563eb" stroke-width="2"/>
+      <text x="425" y="127" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">DISCRIMINADOR</text>
+      <text x="425" y="145" text-anchor="middle" fill="#2563eb" font-size="10">D(x)</text>
+      <text x="425" y="162" text-anchor="middle" fill="#475569" font-size="9">Red Neuronal</text>
+      <!-- Flecha D->decision -->
+      <path d="M490 135 L555 135" stroke="#2563eb" stroke-width="1.5" marker-end="url(#ab)"/>
+      <!-- Decision -->
+      <rect x="555" y="105" width="120" height="60" rx="10" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="615" y="130" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">Real / Falso</text>
+      <text x="615" y="148" text-anchor="middle" fill="#3b82f6" font-size="10">P(real) en [0,1]</text>
+      <!-- Retroalimentacion -->
+      <path d="M615 165 L615 248 L230 248 L230 185" stroke="#d97706" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#aa)"/>
+      <text x="415" y="265" text-anchor="middle" fill="#d97706" font-size="10">Gradiente de error (backpropagation)</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:var(--violet)"></div>Generador: convierte ruido en muestras sinteticas</div>
+    <div class="legend-item"><div class="dot" style="background:var(--blue)"></div>Discriminador: distingue muestras reales de generadas</div>
+    <div class="legend-item"><div class="dot" style="background:var(--amber)"></div>Gradiente: la senal de error que guia el aprendizaje</div>
+  </div>
+</section>
+
+<!-- ENTRENAMIENTO -->
+<section id="entrenamiento">
+  <h2>Animacion del entrenamiento</h2>
+  <p>Observa como evolucionan las perdidas y la calidad de las muestras generadas a lo largo de las epocas.</p>
+
+  <div class="training-wrap">
+    <div>
+      <div class="canvas-box">
+        <canvas id="trainCanvas" width="220" height="220"></canvas>
+        <div class="canvas-overlay" id="epochLabel">Epoca 1</div>
+      </div>
+      <div class="canvas-label">Muestra generada &mdash; Calidad: <span id="qualityPct">0%</span></div>
+      <div class="controls">
+        <button class="btn btn-outline btn-sm" onclick="resetAnim()">Reiniciar</button>
+        <button class="btn btn-primary btn-sm" id="playBtn" onclick="togglePlay()">Reproducir</button>
+      </div>
+      <div class="progress-wrap">
+        <input type="range" id="epochSlider" min="0" max="49" value="0" oninput="scrubTo(this.value)">
+        <div class="epoch-info"><span>Epoca 1</span><span>Epoca 50</span></div>
+      </div>
+    </div>
+
+    <div class="loss-chart-wrap">
+      <p>Curva de perdidas</p>
+      <svg id="lossChart" viewBox="0 0 300 180" style="width:100%;">
+        <line x1="30" y1="10" x2="30" y2="155" stroke="#334155" stroke-width="1"/>
+        <line x1="30" y1="155" x2="290" y2="155" stroke="#334155" stroke-width="1"/>
+        <text x="15" y="15" fill="#64748b" font-size="8" text-anchor="middle">Alto</text>
+        <text x="15" y="157" fill="#64748b" font-size="8" text-anchor="middle">Bajo</text>
+        <text x="160" y="174" fill="#64748b" font-size="8" text-anchor="middle">Epocas</text>
+        <polyline id="dLine" fill="none" stroke="#93c5fd" stroke-width="1.5" points=""/>
+        <polyline id="gLine" fill="none" stroke="#a78bfa" stroke-width="1.5" points=""/>
+      </svg>
+      <div class="loss-legend">
+        <span><span class="line-d"></span>Discriminador: <b id="dVal">-</b></span>
+        <span><span class="line-g"></span>Generador: <b id="gVal">-</b></span>
+      </div>
+      <div class="phase-label" id="phaseLabel"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPACIO LATENTE -->
+<section id="latente">
+  <h2>Explorador del espacio latente</h2>
+  <p>Mueve los controles para cambiar los parametros del vector de ruido y observa como varia la muestra generada en tiempo real.</p>
+
+  <div class="latent-wrap">
+    <div>
+      <div class="canvas-box">
+        <canvas id="latentCanvas" width="240" height="240"></canvas>
+        <div class="canvas-overlay">Muestra generada</div>
+      </div>
+      <div class="controls" style="margin-top:.75rem;">
+        <button class="btn btn-primary btn-sm" id="animBtn" onclick="toggleLatentAnim()">Animar recorrido</button>
+        <button class="btn btn-outline btn-sm" onclick="randomizeLatent()">Aleatorio</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="vector-display" id="vectorDisplay"></div>
+      <div id="sliders"></div>
+      <div class="info-box">
+        En una GAN real, el espacio latente tiene 100 o mas dimensiones. Cada una controla un aspecto de la muestra: edad, estilo del cabello, orientacion del rostro en imagenes de caras.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMINIOS -->
+<section id="dominios">
+  <h2>Dominios de aplicacion</h2>
+  <p>Las GANs se han aplicado a tres grandes dominios con arquitecturas especificas para cada uno.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active-violet" onclick="showTab('images',this)" id="tab-images">Imagenes</button>
+    <button class="tab-btn" onclick="showTab('text',this)"   id="tab-text">Texto</button>
+    <button class="tab-btn" onclick="showTab('audio',this)"  id="tab-audio">Audio</button>
+  </div>
+
+  <!-- IMAGENES -->
+  <div class="tab-panel active" id="panel-images">
+    <p>Las imagenes son datos continuos con estructura espacial regular, ideales para GANs convolucionales. Hoy existen caras sinteticas indistinguibles de fotografias reales.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name">DCGAN</span><span class="arch-desc">Arquitectura base con convoluciones. Genera imagenes coherentes.</span></div>
+        <div class="arch-item"><span class="arch-name">StyleGAN 2/3</span><span class="arch-desc">Control fino del estilo a distintas escalas. Imagenes fotorrealistas.</span></div>
+        <div class="arch-item"><span class="arch-name">Pix2Pix</span><span class="arch-desc">Transformacion condicionada: boceto a fotografia, mapa a satelite.</span></div>
+        <div class="arch-item"><span class="arch-name">CycleGAN</span><span class="arch-desc">Transformacion sin pares de entrenamiento: caballos a cebras.</span></div>
+        <div class="arch-item"><span class="arch-name">SRGAN</span><span class="arch-desc">Super-resolucion: aumentar la resolucion con detalles plausibles.</span></div>
+      </div>
+      <div>
+        <h3>Desafios</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">Inestabilidad durante el entrenamiento</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Colapso de modo: el generador produce variedad reducida</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Evaluacion objetiva de la calidad visual</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="tab-panel" id="panel-text">
+    <p>El texto es discreto: no existe nada entre la palabra "gato" y la palabra "perro". Esto impide el flujo directo del gradiente, por lo que se necesitan tecnicas especiales.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name blue">SeqGAN</span><span class="arch-desc">Usa Monte Carlo Tree Search para estimar el gradiente sobre secuencias discretas.</span></div>
+        <div class="arch-item"><span class="arch-name blue">TextGAN</span><span class="arch-desc">Trabaja en el espacio continuo de embeddings para permitir el flujo de gradiente.</span></div>
+        <div class="arch-item"><span class="arch-name blue">MaskGAN</span><span class="arch-desc">Rellena partes enmascaradas de un texto de forma coherente con el contexto.</span></div>
+        <div class="arch-item"><span class="arch-name blue">Trans-GAN</span><span class="arch-desc">Combina la arquitectura Transformer con el esquema adversarial.</span></div>
+      </div>
+      <div>
+        <h3>Desafios</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La no diferenciabilidad de la seleccion de palabras discretas</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Dificultad para mantener coherencia a largo plazo</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Los LLMs modernos han superado a las GANs en la mayoria de tareas de texto</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <div class="tab-panel" id="panel-audio">
+    <p>El audio puede tratarse como forma de onda 1D o transformarse en un espectrograma 2D. La segunda aproximacion reutiliza directamente las tecnicas de imagenes.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name cyan">WaveGAN</span><span class="arch-desc">Opera directamente sobre la forma de onda con convoluciones 1D.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">MelGAN</span><span class="arch-desc">Genera espectrogramas Mel tratando el audio como una imagen 2D.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">HiFi-GAN</span><span class="arch-desc">Vocoder de alta fidelidad con multiples discriminadores a distintas escalas.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">MuseGAN</span><span class="arch-desc">Generacion musical polifonica: coordina multiples instrumentos.</span></div>
+      </div>
+      <div>
+        <h3>Desafios</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La coherencia temporal: el oido detecta discontinuidades que el ojo ignora</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Secuencias muy largas: 44.100 muestras por segundo en calidad CD</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Artefactos sonoros como clicks y distorsion son muy perceptibles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Pildora formativa sobre Redes Generativas Adversarias</p>
+  <p style="margin-top:.3rem;">Basada en Goodfellow et al. (2014) &mdash; Generative Adversarial Nets</p>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────
+   UTILIDADES
+───────────────────────────────────────── */
+function sr(seed) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+/* ─────────────────────────────────────────
+   STEP EXPLAINER
+───────────────────────────────────────── */
+const STEPS = [
+  {
+    title: "El Generador produce una muestra",
+    desc:  "El Generador toma un vector de numeros aleatorios (ruido) y lo transforma en una muestra. Al principio del entrenamiento, estas muestras son completamente aleatorias e incoherentes.",
+    meta:  "El falsificador toma papel en blanco y, sin haber visto billetes reales, intenta fabricar uno de memoria. El resultado inicial es un garabato sin sentido."
+  },
+  {
+    title: "El Discriminador evalua la muestra",
+    desc:  "El Discriminador recibe la muestra generada junto con muestras reales. Analiza las caracteristicas y produce un numero entre 0 (falso) y 1 (real). Su objetivo es clasificar correctamente.",
+    meta:  "El detective examina el billete bajo la lupa. Detecta facilmente el error: el papel es incorrecto, la tinta no tiene relieve, el holograma no existe."
+  },
+  {
+    title: "El Generador aprende del error",
+    desc:  "La senal de error del Discriminador se propaga hacia atras hasta el Generador. Este ajusta sus parametros para producir muestras mas dificiles de detectar en la siguiente iteracion.",
+    meta:  "El falsificador recibe la critica del detective: el papel es fino y no tiene marca de agua. En el siguiente intento usa papel mas grueso con textura."
+  },
+  {
+    title: "El Discriminador tambien mejora",
+    desc:  "Ahora el Discriminador entrena de nuevo con muestras reales y las nuevas muestras mejoradas del Generador. Se adapta para seguir distinguiendo correctamente.",
+    meta:  "El detective, al ver billetes de mejor calidad, se forma con expertos del banco central y aprende a detectar detalles mas sutiles."
+  },
+  {
+    title: "El ciclo llega al equilibrio",
+    desc:  "El proceso se repite miles de veces. Al final, el Generador produce muestras tan buenas que el Discriminador acierta solo el 50% de las veces, es decir, acierta por azar.",
+    meta:  "Despues de anos de practica, los billetes del falsificador son perfectos. Ni el detector automatico ni el experto humano pueden distinguirlos."
+  }
+];
+
+let currentStep = 0;
+
+function renderSteps() {
+  const btns = document.getElementById("stepBtns");
+  btns.innerHTML = STEPS.map((s, i) =>
+    `<button class="step-btn ${i===currentStep?'active':''}" onclick="gotoStep(${i})">${i+1}. ${s.title.split(" ")[2]}</button>`
+  ).join("");
+  document.getElementById("stepTitle").textContent   = STEPS[currentStep].title;
+  document.getElementById("stepDesc").textContent    = STEPS[currentStep].desc;
+  document.getElementById("stepMeta").textContent    = STEPS[currentStep].meta;
+  document.getElementById("stepCounter").textContent = `${currentStep+1} de ${STEPS.length}`;
+  document.getElementById("prevBtn").disabled = currentStep === 0;
+  document.getElementById("nextBtn").disabled = currentStep === STEPS.length - 1;
+}
+
+function gotoStep(i) { currentStep = i; renderSteps(); }
+function changeStep(d) { gotoStep(Math.max(0, Math.min(STEPS.length-1, currentStep+d))); }
+renderSteps();
+
+/* ─────────────────────────────────────────
+   TRAINING ANIMATION
+───────────────────────────────────────── */
+const FRAMES = (function() {
+  const f = [];
+  for (let e = 1; e <= 50; e++) {
+    const p = e / 50;
+    f.push({
+      epoch:   e,
+      dLoss:   0.7 * Math.exp(-p*0.5) + 0.3 + sr(e*1.1)*0.1 - 0.05,
+      gLoss:   2.5 * Math.exp(-p*0.8) + 0.8 + sr(e*2.3)*0.15 - 0.075,
+      quality: Math.min(1, p*1.2)
+    });
+  }
+  return f;
+})();
+
+let frameIdx  = 0;
+let playTimer = null;
+
+function drawTrainCanvas(fi) {
+  const f   = FRAMES[fi];
+  const cv  = document.getElementById("trainCanvas");
+  const ctx = cv.getContext("2d");
+  const sz  = cv.width;
+  const cs  = sz / 10;
+  ctx.fillStyle = "#0f172a";
+  ctx.fillRect(0, 0, sz, sz);
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const x    = c / 9, y = r / 9;
+      const seed = f.epoch * 0.01;
+      const noise  = sr(r*100 + c + f.epoch*13);
+      const signal = Math.abs(Math.sin(x*Math.PI*3+seed)) * Math.abs(Math.cos(y*Math.PI*2+seed*0.5));
+      const int    = Math.max(0, Math.min(1, noise*(1-f.quality) + signal*f.quality));
+      const g      = Math.round(int * 220);
+      ctx.fillStyle = `rgb(${g},${Math.round(g*.85)},${Math.round(g*1.1)})`;
+      ctx.fillRect(c*cs, r*cs, cs-1, cs-1);
+    }
+  }
+}
+
+function updateTrainUI(fi) {
+  const f = FRAMES[fi];
+  document.getElementById("epochLabel").textContent  = `Epoca ${f.epoch}`;
+  document.getElementById("qualityPct").textContent  = `${Math.round(f.quality*100)}%`;
+  document.getElementById("epochSlider").value       = fi;
+  document.getElementById("dVal").textContent        = f.dLoss.toFixed(3);
+  document.getElementById("gVal").textContent        = f.gLoss.toFixed(3);
+  // Phase label
+  const ph = f.quality < 0.3 ? "Fase inicial: el Generador produce ruido. El Discriminador detecta facilmente todos los falsos."
+           : f.quality < 0.6 ? "Fase media: el Generador capta patrones basicos. Las perdidas comienzan a estabilizarse."
+           : f.quality < 0.85? "Fase avanzada: las muestras son cada vez mas coherentes. La competencia es intensa."
+           :                   "Fase de convergencia: muestras de alta calidad. El Discriminador se acerca al 50%.";
+  document.getElementById("phaseLabel").textContent = ph;
+  // Loss lines
+  const maxD = Math.max(...FRAMES.map(x=>x.dLoss));
+  const maxG = Math.max(...FRAMES.map(x=>x.gLoss));
+  const pts  = (arr, max) => arr.slice(0, fi+1).map((val, i) => {
+    const px = 30 + (i/(FRAMES.length-1))*260;
+    const py = 155 - (val/max)*135;
+    return `${px},${py}`;
+  }).join(" ");
+  document.getElementById("dLine").setAttribute("points", pts(FRAMES.map(x=>x.dLoss), maxD));
+  document.getElementById("gLine").setAttribute("points", pts(FRAMES.map(x=>x.gLoss), maxG));
+  drawTrainCanvas(fi);
+}
+
+function togglePlay() {
+  if (playTimer) {
+    clearInterval(playTimer);
+    playTimer = null;
+    document.getElementById("playBtn").textContent = "Reproducir";
+  } else {
+    if (frameIdx >= 49) frameIdx = 0;
+    document.getElementById("playBtn").textContent = "Pausar";
+    playTimer = setInterval(() => {
+      frameIdx++;
+      updateTrainUI(frameIdx);
+      if (frameIdx >= 49) {
+        clearInterval(playTimer); playTimer = null;
+        document.getElementById("playBtn").textContent = "Repetir";
+      }
+    }, 100);
+  }
+}
+
+function resetAnim() {
+  if (playTimer) { clearInterval(playTimer); playTimer = null; }
+  document.getElementById("playBtn").textContent = "Reproducir";
+  frameIdx = 0;
+  updateTrainUI(0);
+}
+
+function scrubTo(v) {
+  if (playTimer) { clearInterval(playTimer); playTimer = null; document.getElementById("playBtn").textContent = "Reproducir"; }
+  frameIdx = parseInt(v);
+  updateTrainUI(frameIdx);
+}
+
+updateTrainUI(0);
+
+/* ─────────────────────────────────────────
+   LATENT SPACE EXPLORER
+───────────────────────────────────────── */
+const PARAM_LABELS = [
+  "Dimension 1 — forma general",
+  "Dimension 2 — grosor del trazo",
+  "Dimension 3 — inclinacion",
+  "Dimension 4 — textura"
+];
+
+let latentParams = [0, 0, 0, 0];
+let latentAnim   = null;
+let latentT      = 0;
+
+function drawLatent() {
+  const cv  = document.getElementById("latentCanvas");
+  const ctx = cv.getContext("2d");
+  const sz  = cv.width;
+  const cs  = sz / 8;
+  const [p0,p1,p2,p3] = latentParams.map(v => (v+1)/2);
+  ctx.fillStyle = "#0f172a";
+  ctx.fillRect(0, 0, sz, sz);
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const x = c/7, y = r/7;
+      const int = Math.sin(x*Math.PI*(1+p0*3)) * Math.cos(y*Math.PI*(1+p1*2)) * 0.5
+                + Math.abs(Math.sin((x+y)*Math.PI*(1+p2*2))) * p3 * 0.5 + 0.1;
+      const g = Math.round(Math.max(0, Math.min(1, int)) * 230);
+      ctx.fillStyle = `rgb(${g},${g},${Math.round(g*.8)})`;
+      ctx.fillRect(c*cs, r*cs, cs-1, cs-1);
+    }
+  }
+  document.getElementById("vectorDisplay").textContent =
+    `z = [${latentParams.map(v=>v.toFixed(2)).join(", ")}]`;
+  document.querySelectorAll(".latent-val").forEach((el, i) => {
+    el.textContent = latentParams[i].toFixed(3);
+  });
+  document.querySelectorAll(".latent-range").forEach((el, i) => {
+    el.value = latentParams[i];
+  });
+}
+
+function buildSliders() {
+  const wrap = document.getElementById("sliders");
+  wrap.innerHTML = PARAM_LABELS.map((lbl, i) => `
+    <div class="slider-row">
+      <label>${lbl}<span class="latent-val">0.000</span></label>
+      <input type="range" class="latent-range" min="-1" max="1" step="0.01" value="0"
+        oninput="setLatent(${i}, parseFloat(this.value))">
+    </div>
+  `).join("");
+}
+
+function setLatent(i, v) {
+  latentParams[i] = v;
+  drawLatent();
+}
+
+function randomizeLatent() {
+  latentParams = latentParams.map(() => Math.random()*2-1);
+  drawLatent();
+}
+
+function toggleLatentAnim() {
+  const btn = document.getElementById("animBtn");
+  if (latentAnim) {
+    cancelAnimationFrame(latentAnim); latentAnim = null;
+    btn.textContent = "Animar recorrido";
+    document.querySelectorAll(".latent-range").forEach(el => el.disabled = false);
+  } else {
+    btn.textContent = "Detener animacion";
+    document.querySelectorAll(".latent-range").forEach(el => el.disabled = true);
+    const step = (ts) => {
+      latentT = ts / 1000;
+      latentParams = [
+        Math.sin(latentT*.7), Math.cos(latentT*.5),
+        Math.sin(latentT*.3+1), Math.cos(latentT*.9+2)
+      ];
+      drawLatent();
+      latentAnim = requestAnimationFrame(step);
+    };
+    latentAnim = requestAnimationFrame(step);
+  }
+}
+
+buildSliders();
+drawLatent();
+
+/* ─────────────────────────────────────────
+   DOMAIN TABS
+───────────────────────────────────────── */
+const TAB_COLORS = { images:"active-violet", text:"active-blue", audio:"active-cyan" };
+
+function showTab(id, btn) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => {
+    b.className = "tab-btn";
+  });
+  document.getElementById("panel-"+id).classList.add("active");
+  btn.classList.add(TAB_COLORS[id]);
+}
+</script>
+</body>
+</html>
