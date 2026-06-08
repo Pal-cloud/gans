@@ -277,43 +277,43 @@ El audio puede introducirse en una GAN de dos formas principales:
 
 **WaveGAN:** Adapta la DCGAN para operar sobre forma de onda unidimensional. Usa convoluciones 1D en lugar de 2D. Fue uno de los primeros modelos en generar audio musical y de voz de calidad aceptable directamente en el dominio temporal.
 
-**MelGAN:** Genera espectrogramas Mel de alta calidad que luego se convierten a forma de onda. Es mas eficiente que WaveGAN porque trabaja con una representacion compacta del audio.
+**MelGAN:** Genera espectrogramas Mel de alta calidad que luego se convierten a forma de onda. Es mas eficiente que WaveGAN porque trabaja con una representación compacta del audio.
 
-**HiFi-GAN:** Arquitectura de sintesis de voz de alta fidelidad que usa multiples discriminadores a diferentes escalas temporales para garantizar coherencia tanto a nivel de ciclos individuales de la onda como a nivel de frases completas.
+**HiFi-GAN:** Arquitectura de síntesis de voz de alta fidelidad que usa múltiples discriminadores a diferentes escalas temporales para garantizar coherencia tanto a nivel de ciclos individuales de la onda como a nivel de frases completas.
 
-**MuseGAN:** Disenada para generar musica polifonica (multiples instrumentos). Usa un modelo temporal para la progresion musical y un modelo de composicion para la coordinacion entre instrumentos.
+**MuseGAN:** Diseñada para generar música polifónica (múltiples instrumentos). Usa un modelo temporal para la progresión musical y un modelo de composición para la coordinación entre instrumentos.
 
-### Desafios especificos del audio
+### Desafíos específicos del audio
 
-- La coherencia temporal es critica: el oido humano detecta discontinuidades que el ojo podria ignorar
-- Los artefactos sonoros (clicks, distorsion) son muy perceptibles
-- La evaluacion objetiva de calidad es mas dificil que en imagenes
+- La coherencia temporal es crítica: el oçido humano detecta discontinuidades que el ojo podría ignorar
+- Los artefactos sonoros (clicks, distorsión) son muy perceptibles
+- La evaluación objetiva de calidad es mas difícil que en imagenes
 
 ---
 
-## 8. Aplicacion web interactiva
+## 8. Aplicación web interactiva
 
-La aplicacion web incluida en este repositorio permite explorar los conceptos de las GANs de forma visual e interactiva, sin necesidad de conocer programacion.
+La aplicacion web incluida en este repositorio permite explorar los conceptos de las GANs de forma visual e interactiva, sin necesidad de conocer programación.
 
 ### Que incluye la aplicacion
 
 **Visualizacion del espacio latente:**
-Una interfaz de sliders que permite al usuario manipular el vector de ruido de entrada (espacio latente) y ver en tiempo real como cambia la imagen generada. Esto ilustra como distintas dimensiones del espacio latente controlan distintos atributos visuales.
+Una interfaz de sliders (controles deslizantes) que permite al usuario manipular el vector de ruido de entrada (espacio latente) y ver en tiempo real como cambia la imagen generada. Esto ilustra cómo distintas dimensiones del espacio latente controlan distintos atributos visuales.
 
-**Animacion del proceso de entrenamiento:**
-Una visualizacion paso a paso que muestra como evoluciona el Generador a lo largo de las epocas de entrenamiento, desde imagenes completamente aleatorias hasta imagenes coherentes. Permite entender visualmente el concepto de convergencia.
+**Animación del proceso de entrenamiento:**
+Una visualización paso a paso que muestra como evoluciona el Generador a lo largo de las epocas de entrenamiento, desde imágenes completamente aleatorias hasta imagenes coherentes. Permite entender visualmente el concepto de convergencia.
 
-**Comparacion real vs. generado:**
-Un panel de comparacion lado a lado donde el usuario puede ver imagenes reales del conjunto de datos junto a imagenes generadas, apreciando el nivel de realismo alcanzado.
+**Comparación real vs. generado:**
+Un panel de comparación lado a lado donde el usuario puede ver imágenes reales del conjunto de datos junto a imagenes generadas, apreciando el nivel de realismo alcanzado.
 
-**Explicacion interactiva del flujo de datos:**
-Un diagrama animado que muestra el recorrido de los datos a traves del Generador y el Discriminador, con indicacion del valor de perdida en cada paso.
+**Explicación interactiva del flujo de datos:**
+Un diagrama animado que muestra el recorrido de los datos a través del Generador y el Discriminador, con indicación del valor de pérdida en cada paso.
 
-### Tecnologias utilizadas
+### Tecnologías utilizadas
 
 - Next.js 14 con App Router para la estructura de la aplicacion
-- TypeScript para tipado estatico y mejor mantenibilidad
-- Tailwind CSS para el diseno visual
+- TypeScript para tipado estático y mejor mantenibilidad
+- Tailwind CSS para el diseñoo visual
 - Canvas API para las visualizaciones interactivas
 - TensorFlow.js para ejecutar modelos pre-entrenados directamente en el navegador
 
@@ -365,7 +365,7 @@ Vercel detecta automaticamente Next.js y despliega con una URL publica tipo `htt
 
 1. Crear cuenta en railway.app
 2. Conectar el repositorio de GitHub
-3. Railway detecta el Dockerfile y despliega automaticamente
+3. Railway detecta el Dockerfile y despliega automáticamente
 4. Se obtiene una URL publica tipo `https://gans-webapp.up.railway.app`
 
 **Opcion C: Fly.io**
@@ -375,7 +375,7 @@ fly launch --dockerfile webapp/Dockerfile
 fly deploy
 ```
 
-### Variables de entorno para produccion
+### Variables de entorno para producción
 
 Crear un fichero `.env.production` en la carpeta `webapp`:
 
@@ -442,6 +442,6 @@ Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S
 - Yu, L., Zhang, W., Wang, J., y Yu, Y. (2017). SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient. *AAAI 2017*.
 
 **Recursos adicionales:**
-- GAN Zoo (github.com/hindupuravinash/the-gan-zoo): catalogo de variantes de GANs publicadas
-- Papers With Code - GANs (paperswithcode.com): implementaciones y benchmarks actualizados
-- This Person Does Not Exist (thispersondoesnotexist.com): demostracion publica de StyleGAN
+- GAN Zoo (https://github.com/hindupuravinash/the-gan-zoo): catalogo de variantes de GANs publicadas
+- Papers With Code - GANs (https://paperswithcode.com): implementaciones y benchmarks actualizados
+- This Person Does Not Exist (https://thispersondoesnotexist.com): demostracion publica de StyleGAN
