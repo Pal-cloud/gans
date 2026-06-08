@@ -9,13 +9,23 @@ type Frame = {
   quality: number; // 0-1, calidad visual simulada
 };
 
+/**
+ * Generador pseudoaleatorio determinista basado en semilla (algoritmo mulberry32).
+ * Produce siempre los mismos valores para la misma semilla, tanto en el servidor
+ * (SSR) como en el cliente, evitando errores de hidratacion de React / Next.js.
+ */
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
 function generateFrames(): Frame[] {
   const frames: Frame[] = [];
   for (let epoch = 1; epoch <= 50; epoch++) {
     const progress = epoch / 50;
-    // Simular curvas de perdida tipicas de una GAN
-    const dLoss = 0.7 * Math.exp(-progress * 0.5) + 0.3 + Math.random() * 0.1 - 0.05;
-    const gLoss = 2.5 * Math.exp(-progress * 0.8) + 0.8 + Math.random() * 0.15 - 0.075;
+    // Las semillas son constantes: mismo resultado en servidor y cliente
+    const dLoss = 0.7 * Math.exp(-progress * 0.5) + 0.3 + seededRandom(epoch * 1.1) * 0.1 - 0.05;
+    const gLoss = 2.5 * Math.exp(-progress * 0.8) + 0.8 + seededRandom(epoch * 2.3) * 0.15 - 0.075;
     const quality = Math.min(1, progress * 1.2);
     frames.push({ epoch, dLoss, gLoss, quality });
   }
@@ -41,8 +51,8 @@ function drawPixelImage(
       const y = row / 9;
       const seed = epoch * 0.01;
 
-      // Ruido aleatorio mezclado con patron coherente segun quality
-      const noise = Math.random();
+      // Ruido determinista: misma semilla = mismo valor en servidor y cliente
+      const noise = seededRandom(row * 100 + col + epoch * 13);
       const signal =
         Math.abs(Math.sin(x * Math.PI * 3 + seed)) *
         Math.abs(Math.cos(y * Math.PI * 2 + seed * 0.5));
