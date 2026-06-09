@@ -304,9 +304,9 @@ La DCGAN reemplaza las capas lineales por capas convolucionales y transpuestas. 
 
 Reglas clave de diseño de una DCGAN:
 
-- Usar Batch Normalization en todas las capas excepto la de entrada del Discriminador y la de salida del Generador.
-- Usar LeakyReLU en el Discriminador y ReLU en el Generador.
-- Usar Tanh como activación de salida del Generador.
+- Usar Batch Normalization en todas las capas excepto la de entrada del Discriminador y la de salida del Generador. Modifica los datos en cada capa para que mantengan la misma escala y el entrenamiento no se vuelva loco (excepto al principio y al final).
+- Usar LeakyReLU en el Discriminador y ReLU en el Generador.Funciones de activación. LeakyReLU deja pasar una pequeña parte de las señales negativas para que el Discriminador nunca deje de aprender.
+- Usar Tanh como activación de salida del Generador.La función de salida del generador que escala los píxeles entre -1 y 1.
 
 ### Variantes importantes para imágenes
 
