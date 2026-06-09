@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GANs - Redes Generativas Adversarias | Pildora Formativa</title>
+  <title>GANs - Redes Generativas Adversarias | Píldora Formativa</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -33,7 +33,8 @@
       background: var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 17px;
     }
 
     /* ── NAV ── */
@@ -46,25 +47,25 @@
       display: flex; align-items: center; gap: 2rem;
       height: 56px;
     }
-    nav .logo { font-weight: 700; color: var(--violet-l); font-size: 1rem; white-space: nowrap; }
-    nav a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    nav .logo { font-weight: 700; color: var(--violet-l); font-size: 1.05rem; white-space: nowrap; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .95rem; transition: color .2s; }
     nav a:hover { color: var(--text); }
 
     /* ── SECTIONS ── */
     section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
     section + section { border-top: 1px solid var(--border); }
 
-    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
-    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: .5rem; }
-    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: .75rem; color: var(--violet-l); }
-    p  { color: var(--muted); margin-bottom: 1rem; }
-    ul { color: var(--muted); padding-left: 1.4rem; margin-bottom: 1rem; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.65rem, 3vw, 2.3rem); font-weight: 700; margin-bottom: .5rem; }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: .75rem; color: var(--violet-l); }
+    p  { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; }
+    ul { color: var(--muted); padding-left: 1.4rem; margin-bottom: 1rem; font-size: 1rem; }
     li { margin-bottom: .3rem; }
 
     .badge {
       display: inline-block;
-      padding: .2rem .6rem; border-radius: 999px;
-      font-size: .75rem; font-weight: 600;
+      padding: .25rem .75rem; border-radius: 999px;
+      font-size: .85rem; font-weight: 600;
       background: rgba(124,58,237,.2); color: var(--violet-l);
       border: 1px solid rgba(124,58,237,.4);
       margin-bottom: 1rem;
@@ -76,8 +77,8 @@
     }
 
     .btn {
-      display: inline-block; padding: .75rem 1.75rem;
-      border-radius: .75rem; font-weight: 600; font-size: .9rem;
+      display: inline-block; padding: .85rem 2rem;
+      border-radius: .75rem; font-weight: 600; font-size: 1rem;
       cursor: pointer; transition: all .2s; border: none;
       text-decoration: none;
     }
@@ -85,7 +86,7 @@
     .btn-primary:hover { background: #6d28d9; }
     .btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
     .btn-outline:hover { border-color: var(--muted); color: var(--text); }
-    .btn-sm { padding: .45rem 1rem; font-size: .82rem; border-radius: .6rem; }
+    .btn-sm { padding: .5rem 1.1rem; font-size: .9rem; border-radius: .6rem; }
     .btn:disabled { opacity: .4; cursor: not-allowed; }
 
     /* ── CARDS ── */
@@ -103,7 +104,7 @@
     /* ── STEP EXPLAINER ── */
     .steps { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .step-btn {
-      padding: .4rem .9rem; border-radius: .6rem; font-size: .82rem; font-weight: 600;
+      padding: .5rem 1rem; border-radius: .6rem; font-size: .9rem; font-weight: 600;
       border: 1px solid var(--border); background: transparent;
       color: var(--dim); cursor: pointer; transition: all .2s;
     }
@@ -111,7 +112,7 @@
     .step-content { border-radius: 1rem; border: 1px solid var(--violet); background: rgba(124,58,237,.08); padding: 1.5rem; }
     .step-content .metaphor { margin-top: 1rem; padding: 1rem; border-radius: .75rem; background: var(--bg3); border: 1px solid var(--border); font-style: italic; color: var(--muted); }
     .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
-    .step-counter { color: var(--dim); font-size: .85rem; }
+    .step-counter { color: var(--dim); font-size: .92rem; }
 
     /* ── ARCHITECTURE SVG ── */
     .svg-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; overflow-x: auto; }
@@ -143,15 +144,15 @@
     .canvas-box { position: relative; display: inline-block; }
     .canvas-overlay { position: absolute; top: .5rem; left: .5rem; background: rgba(15,23,42,.8); padding: .2rem .5rem; border-radius: .4rem; font-size: .72rem; color: var(--muted); }
     .slider-row { margin-bottom: 1rem; }
-    .slider-row label { display: flex; justify-content: space-between; font-size: .82rem; color: var(--text); margin-bottom: .3rem; }
+    .slider-row label { display: flex; justify-content: space-between; font-size: .9rem; color: var(--text); margin-bottom: .3rem; }
     .slider-row label span { color: var(--violet-l); font-family: monospace; }
     .vector-display { font-family: monospace; font-size: .78rem; color: var(--dim); margin-bottom: 1rem; }
-    .info-box { padding: .75rem 1rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); font-size: .78rem; color: var(--dim); line-height: 1.5; margin-top: 1rem; }
+    .info-box { padding: .75rem 1rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); font-size: .88rem; color: var(--dim); line-height: 1.5; margin-top: 1rem; }
 
     /* ── DOMAIN TABS ── */
     .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
     .tab-btn {
-      flex: 1; padding: .65rem; border-radius: .75rem; font-size: .85rem; font-weight: 600;
+      flex: 1; padding: .75rem; border-radius: .75rem; font-size: .95rem; font-weight: 600;
       border: 1px solid var(--border); background: transparent;
       color: var(--dim); cursor: pointer; transition: all .2s;
     }
@@ -164,12 +165,12 @@
     .arch-name { flex-shrink: 0; padding: .15rem .5rem; border-radius: .4rem; font-size: .75rem; font-weight: 700; background: rgba(124,58,237,.2); color: var(--violet-l); }
     .arch-name.blue { background: rgba(37,99,235,.2); color: var(--blue-l); }
     .arch-name.cyan { background: rgba(8,145,178,.2); color: var(--cyan-l); }
-    .arch-desc { font-size: .82rem; color: var(--muted); }
+    .arch-desc { font-size: .9rem; color: var(--muted); }
     .challenge-item { display: flex; gap: .75rem; padding: .75rem; border-radius: .75rem; background: var(--bg2); border: 1px solid var(--border); margin-bottom: .6rem; }
     .challenge-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); color: var(--muted); font-size: .75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 1rem; color: var(--dim); font-size: .85rem; }
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 1rem; color: var(--dim); font-size: .95rem; }
 
     /* ── CALLOUT BOXES ── */
     .callout {
@@ -178,7 +179,7 @@
       border-left: 3px solid;
     }
     .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
-    .callout-body { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+    .callout-body { font-size: .97rem; color: var(--muted); line-height: 1.65; }
     .callout-body strong { color: var(--text); }
     .callout.tip    { background: rgba(5,150,105,.08);  border-color: var(--green);  }
     .callout.warn   { background: rgba(217,119,6,.08);  border-color: var(--amber);  }
@@ -187,7 +188,7 @@
 
     /* ── PROGRESS BAR (roadmap) ── */
     .roadmap { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0; }
-    .road-item { display: flex; align-items: center; gap: 1rem; padding: .85rem 1.1rem; border-radius: .85rem; background: var(--bg2); border: 1px solid var(--border); font-size: .87rem; cursor: pointer; transition: border-color .2s; text-decoration: none; color: var(--text); }
+    .road-item { display: flex; align-items: center; gap: 1rem; padding: .85rem 1.1rem; border-radius: .85rem; background: var(--bg2); border: 1px solid var(--border); font-size: .95rem; cursor: pointer; transition: border-color .2s; text-decoration: none; color: var(--text); }
     .road-item:hover { border-color: var(--violet); }
     .road-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(124,58,237,.2); color: var(--violet-l); font-size: .78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .road-title { font-weight: 600; }
@@ -197,7 +198,7 @@
     /* ── CODE SECTION ── */
     .code-tabs { display: flex; gap: .4rem; margin-bottom: 0; border-bottom: 1px solid var(--border); }
     .code-tab {
-      padding: .5rem 1rem; font-size: .82rem; font-weight: 600; cursor: pointer;
+      padding: .6rem 1.1rem; font-size: .9rem; font-weight: 600; cursor: pointer;
       border: none; background: transparent; color: var(--dim);
       border-bottom: 2px solid transparent; margin-bottom: -1px;
       transition: all .2s;
@@ -212,21 +213,21 @@
     }
     .code-header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: .6rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
-      font-size: .78rem; color: var(--dim);
+      padding: .7rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
+      font-size: .85rem; color: var(--dim);
     }
     .copy-btn {
-      padding: .2rem .6rem; border-radius: .4rem; border: 1px solid var(--border);
-      background: transparent; color: var(--dim); font-size: .75rem; cursor: pointer;
+      padding: .25rem .7rem; border-radius: .4rem; border: 1px solid var(--border);
+      background: transparent; color: var(--dim); font-size: .82rem; cursor: pointer;
       transition: all .2s;
     }
     .copy-btn:hover { border-color: var(--violet); color: var(--violet-l); }
     .copy-btn.copied { border-color: var(--green); color: var(--green-l); }
 
     pre {
-      padding: 1.25rem 1.5rem;
+      padding: 1.4rem 1.5rem;
       font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
-      font-size: .82rem; line-height: 1.7;
+      font-size: .9rem; line-height: 1.75;
       overflow-x: auto; margin: 0;
     }
     /* Syntax highlight manual */
@@ -245,11 +246,11 @@
     }
     .console-header {
       display: flex; align-items: center; gap: .5rem;
-      padding: .6rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
-      font-size: .78rem; color: var(--dim);
+      padding: .65rem 1rem; background: #161b22; border-bottom: 1px solid var(--border);
+      font-size: .85rem; color: var(--dim);
     }
     .console-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .console-body { padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: .8rem; line-height: 1.8; }
+    .console-body { padding: 1rem 1.25rem; font-family: Consolas, monospace; font-size: .88rem; line-height: 1.8; }
     .c-dim  { color: #8b949e; }
     .c-g    { color: var(--green-l); }
     .c-b    { color: var(--blue-l); }
@@ -268,7 +269,7 @@
       flex-wrap: wrap; margin: 1.5rem 0;
     }
     .schema-box {
-      padding: .6rem 1rem; border-radius: .65rem; font-size: .82rem; font-weight: 600;
+      padding: .7rem 1.1rem; border-radius: .65rem; font-size: .9rem; font-weight: 600;
       border: 1px solid; text-align: center; min-width: 100px;
     }
     .schema-arrow { color: var(--dim); font-size: 1.2rem; padding: 0 .3rem; }
@@ -284,19 +285,19 @@
     @media (max-width:600px) { .concept-grid { grid-template-columns: 1fr; } }
     .concept-card { background: var(--bg2); border: 1px solid var(--border); border-radius: .85rem; padding: 1rem; text-align: left; }
     .concept-card .cc-icon { font-size: 1.5rem; margin-bottom: .4rem; }
-    .concept-card .cc-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
-    .concept-card .cc-sub { font-size: .78rem; color: var(--dim); }
+    .concept-card .cc-title { font-size: .95rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
+    .concept-card .cc-sub { font-size: .85rem; color: var(--dim); }
 
     /* Glossary */
     .glossary { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1rem; }
     @media (max-width:580px) { .glossary { grid-template-columns: 1fr; } }
     .gloss-item { background: var(--bg2); border: 1px solid var(--border); border-radius: .75rem; padding: .85rem 1rem; }
-    .gloss-term { font-size: .85rem; font-weight: 700; color: var(--violet-l); margin-bottom: .3rem; }
-    .gloss-def  { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+    .gloss-term { font-size: .92rem; font-weight: 700; color: var(--violet-l); margin-bottom: .3rem; }
+    .gloss-def  { font-size: .88rem; color: var(--muted); line-height: 1.5; }
 
     /* Section subtitle */
-    .section-sub { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin-bottom: .4rem; }
-    .section-desc { color: var(--muted); font-size: .95rem; margin-bottom: 2rem; max-width: 640px; }
+    .section-sub { font-size: .88rem; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin-bottom: .4rem; }
+    .section-desc { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; max-width: 640px; }
   </style>
 </head>
 <body>
@@ -306,34 +307,31 @@
   <span class="logo">GANs</span>
   <a href="#concepto">Concepto</a>
   <a href="#arquitectura">Arquitectura</a>
-  <a href="#codigo">Codigo</a>
   <a href="#entrenamiento">Entrenamiento</a>
   <a href="#latente">Espacio latente</a>
   <a href="#dominios">Dominios</a>
+  <a href="#codigo">Código</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero" style="text-align:center; padding-top:100px; padding-bottom:80px;">
-  <div class="badge">Pildora formativa interactiva</div>
+  <div class="badge">Píldora formativa interactiva</div>
   <h1>Redes <span class="gradient-text">Generativas Adversarias</span></h1>
   <p style="max-width:580px; margin: 1rem auto 0; font-size:1.05rem;">
-    Aprende que son las GANs desde cero y sin formulas. Conceptos visuales, codigo explicado
-    linea a linea y demostraciones interactivas en el navegador.
+    Aprende qué son las GANs desde cero y sin fórmulas. Conceptos visuales, código explicado
+    línea a línea y demostraciones interactivas en el navegador.
   </p>
 
   <div class="concept-grid" style="max-width:640px; margin: 2rem auto 0;">
     <div class="concept-card">
-      <div class="cc-icon">&#127919;</div>
       <div class="cc-title">Concepto primero</div>
-      <div class="cc-sub">La metafora del falsificador y el detective sin una sola formula</div>
+      <div class="cc-sub">La metáfora del falsificador y el detective sin una sola fórmula</div>
     </div>
     <div class="concept-card">
-      <div class="cc-icon">&#128187;</div>
-      <div class="cc-title">Codigo despues</div>
-      <div class="cc-sub">Una GAN completa en 10 lineas de Python con cada linea anotada</div>
+      <div class="cc-title">Código después</div>
+      <div class="cc-sub">Una GAN completa en 10 líneas de Python con cada línea anotada</div>
     </div>
     <div class="concept-card">
-      <div class="cc-icon">&#128270;</div>
       <div class="cc-title">Experimenta</div>
       <div class="cc-sub">Controla el espacio latente y observa el entrenamiento en tiempo real</div>
     </div>
@@ -341,21 +339,20 @@
 
   <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2.5rem;">
     <a href="#concepto" class="btn btn-primary">Empezar a aprender</a>
-    <a href="#codigo" class="btn btn-outline">Ver el codigo</a>
+    <a href="#codigo" class="btn btn-outline">Ver el código</a>
   </div>
 </section>
 
 <!-- CONCEPTO -->
 <section id="concepto">
   <p class="section-sub">Paso 1 de 6</p>
-  <h2>Como funciona una GAN</h2>
-  <p class="section-desc">Sin codigo y sin matematicas. Sigue el ciclo paso a paso usando la metafora del falsificador y el detective. Cada paso del ciclo corresponde a una operacion real del algoritmo.</p>
+  <h2>Cómo funciona una GAN</h2>
+  <p class="section-desc">Sin código y sin matemáticas. Sigue el ciclo paso a paso usando la metáfora del falsificador y el detective. Cada paso del ciclo corresponde a una operación real del algoritmo.</p>
 
   <div class="callout key">
-    <div class="callout-icon">&#128273;</div>
     <div class="callout-body">
-      <strong>La idea central:</strong> dos redes neuronales compiten entre si. Una aprende a crear, la otra aprende a detectar.
-      La competencia es lo que hace que ambas mejoren sin necesidad de instrucciones explicitas sobre como hacerlo bien.
+      <strong>La idea central:</strong> dos redes neuronales compiten entre sí. Una aprende a crear, la otra aprende a detectar.
+      La competencia es lo que hace que ambas mejoren sin necesidad de instrucciones explícitas sobre cómo hacerlo bien.
     </div>
   </div>
 
@@ -372,31 +369,31 @@
   </div>
 
   <div style="margin-top:2.5rem;">
-    <h3>Glosario basico</h3>
+    <h3>Glosario básico</h3>
     <div class="glossary">
       <div class="gloss-item">
         <div class="gloss-term">Espacio latente (z)</div>
-        <div class="gloss-def">Vector de numeros aleatorios que sirve de "semilla" para el Generador. Cada punto del espacio latente corresponde a una muestra diferente.</div>
+        <div class="gloss-def">Vector de números aleatorios que sirve de «semilla» para el Generador. Cada punto del espacio latente corresponde a una muestra diferente.</div>
       </div>
       <div class="gloss-item">
-        <div class="gloss-term">Perdida (loss)</div>
-        <div class="gloss-def">Numero que mide lo mal que lo esta haciendo una red. El objetivo del entrenamiento es minimizarla ajustando los pesos internos.</div>
+        <div class="gloss-term">Pérdida (loss)</div>
+        <div class="gloss-def">Número que mide lo mal que lo está haciendo una red. El objetivo del entrenamiento es minimizarla ajustando los pesos internos.</div>
       </div>
       <div class="gloss-item">
         <div class="gloss-term">Backpropagation</div>
-        <div class="gloss-def">Algoritmo que calcula cuanto ha contribuido cada peso al error y en que direccion hay que ajustarlo para reducirlo.</div>
+        <div class="gloss-def">Algoritmo que calcula cuánto ha contribuido cada peso al error y en qué dirección hay que ajustarlo para reducirlo.</div>
       </div>
       <div class="gloss-item">
         <div class="gloss-term">Equilibrio de Nash</div>
-        <div class="gloss-def">Punto teorico donde ninguno de los dos jugadores puede mejorar su resultado cambiando solo su propia estrategia. En una GAN: el Discriminador acierta el 50%.</div>
+        <div class="gloss-def">Punto teórico donde ninguno de los dos jugadores puede mejorar su resultado cambiando solo su propia estrategia. En una GAN: el Discriminador acierta el 50 %.</div>
       </div>
       <div class="gloss-item">
         <div class="gloss-term">Colapso de modo</div>
-        <div class="gloss-def">Fallo tipico: el Generador aprende a producir siempre la misma muestra porque engana al Discriminador, perdiendo diversidad.</div>
+        <div class="gloss-def">Fallo típico: el Generador aprende a producir siempre la misma muestra porque engaña al Discriminador, perdiendo diversidad.</div>
       </div>
       <div class="gloss-item">
-        <div class="gloss-term">Epoca (epoch)</div>
-        <div class="gloss-def">Una pasada completa por todo el conjunto de datos de entrenamiento. Un entrenamiento tipico requiere decenas o cientos de epocas.</div>
+        <div class="gloss-term">Época (epoch)</div>
+        <div class="gloss-def">Una pasada completa por todo el conjunto de datos de entrenamiento. Un entrenamiento típico requiere decenas o cientos de épocas.</div>
       </div>
     </div>
   </div>
@@ -406,13 +403,12 @@
 <section id="arquitectura">
   <p class="section-sub">Paso 2 de 6</p>
   <h2>Arquitectura de una GAN</h2>
-  <p class="section-desc">Diagrama del flujo completo de datos. Cada flecha representa una operacion matematica; el color indica quien "posee" ese tramo del calculo.</p>
+  <p class="section-desc">Diagrama del flujo completo de datos. Cada flecha representa una operación matemática; el color indica quién «posee» ese tramo del cálculo.</p>
 
   <div class="callout info">
-    <div class="callout-icon">&#128270;</div>
     <div class="callout-body">
-      <strong>Como leer el diagrama:</strong> el flujo hacia la derecha es la pasada hacia adelante (forward pass): el Generador crea, el Discriminador evalua.
-      La flecha dorada vuelve hacia atras (backward pass): es el gradiente de error que le dice al Generador como mejorar.
+      <strong>Cómo leer el diagrama:</strong> el flujo hacia la derecha es la pasada hacia adelante (forward pass): el Generador crea, el Discriminador evalúa.
+      La flecha dorada vuelve hacia atrás (backward pass): es el gradiente de error que le dice al Generador cómo mejorar.
     </div>
   </div>
 
@@ -463,23 +459,180 @@
     </svg>
   </div>
   <div class="legend">
-    <div class="legend-item"><div class="dot" style="background:var(--violet)"></div>Generador: convierte ruido en muestras sinteticas</div>
+    <div class="legend-item"><div class="dot" style="background:var(--violet)"></div>Generador: convierte ruido en muestras sintéticas</div>
     <div class="legend-item"><div class="dot" style="background:var(--blue)"></div>Discriminador: distingue muestras reales de generadas</div>
-    <div class="legend-item"><div class="dot" style="background:var(--amber)"></div>Gradiente: la senal de error que guia el aprendizaje</div>
+    <div class="legend-item"><div class="dot" style="background:var(--amber)"></div>Gradiente: la señal de error que guía el aprendizaje</div>
+  </div>
+</section>
+
+<!-- ENTRENAMIENTO -->
+<section id="entrenamiento">
+  <p class="section-sub">Paso 3 de 6</p>
+  <h2>Animación del entrenamiento</h2>
+  <p class="section-desc">Reproduce el entrenamiento época a época. Observa cómo la calidad de las imágenes generadas mejora y cómo las curvas de pérdida convergen hacia el equilibrio.</p>
+
+  <div class="callout info">
+    <div class="callout-body">
+      <strong>Qué mirar:</strong> al principio la pérdida del Generador es alta (D lo detecta fácilmente).
+      Con el tiempo ambas curvas se estabilizan y se aproximan. Cuando D tiene pérdida ~0,5 significa que acierta solo por azar: el equilibrio se ha alcanzado.
+    </div>
+  </div>
+
+  <div class="training-wrap">
+    <div>
+      <div class="canvas-box">
+        <canvas id="trainCanvas" width="220" height="220"></canvas>
+        <div class="canvas-overlay" id="epochLabel">Epoca 1</div>
+      </div>
+      <div class="canvas-label">Muestra generada &mdash; Calidad: <span id="qualityPct">0%</span></div>
+      <div class="controls">
+        <button class="btn btn-outline btn-sm" onclick="resetAnim()">Reiniciar</button>
+        <button class="btn btn-primary btn-sm" id="playBtn" onclick="togglePlay()">Reproducir</button>
+      </div>
+      <div class="progress-wrap">
+        <input type="range" id="epochSlider" min="0" max="49" value="0" oninput="scrubTo(this.value)">
+        <div class="epoch-info"><span>Época 1</span><span>Época 50</span></div>
+      </div>
+    </div>
+
+    <div class="loss-chart-wrap">
+      <p>Curva de pérdidas</p>
+      <svg id="lossChart" viewBox="0 0 300 180" style="width:100%;">
+        <line x1="30" y1="10" x2="30" y2="155" stroke="#334155" stroke-width="1"/>
+        <line x1="30" y1="155" x2="290" y2="155" stroke="#334155" stroke-width="1"/>
+        <text x="15" y="15" fill="#64748b" font-size="8" text-anchor="middle">Alto</text>
+        <text x="15" y="157" fill="#64748b" font-size="8" text-anchor="middle">Bajo</text>
+        <text x="160" y="174" fill="#64748b" font-size="8" text-anchor="middle">Épocas</text>
+        <polyline id="dLine" fill="none" stroke="#93c5fd" stroke-width="1.5" points=""/>
+        <polyline id="gLine" fill="none" stroke="#a78bfa" stroke-width="1.5" points=""/>
+      </svg>
+      <div class="loss-legend">
+        <span><span class="line-d"></span>Discriminador: <b id="dVal">-</b></span>
+        <span><span class="line-g"></span>Generador: <b id="gVal">-</b></span>
+      </div>
+      <div class="phase-label" id="phaseLabel"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPACIO LATENTE -->
+<section id="latente">
+  <p class="section-sub">Paso 4 de 6</p>
+  <h2>Explorador del espacio latente</h2>
+  <p class="section-desc">Mueve los controles para cambiar los parámetros del vector de ruido z y observa cómo varía la muestra en tiempo real. Cada dimensión controla un atributo diferente.</p>
+
+  <div class="callout tip">
+    <div class="callout-body">
+      <strong>Conexión con la metáfora:</strong> este vector z es exactamente el «papel en blanco» del que parte el falsificador.
+      Cada posición del vector influye en cómo será la muestra generada, igual que la calidad del papel influye en el resultado final del billete.
+    </div>
+  </div>
+
+  <div class="latent-wrap">
+    <div>
+      <div class="canvas-box">
+        <canvas id="latentCanvas" width="240" height="240"></canvas>
+        <div class="canvas-overlay">Muestra generada</div>
+      </div>
+      <div class="controls" style="margin-top:.75rem;">
+        <button class="btn btn-primary btn-sm" id="animBtn" onclick="toggleLatentAnim()">Animar recorrido</button>
+        <button class="btn btn-outline btn-sm" onclick="randomizeLatent()">Aleatorio</button>      </div>
+    </div>
+
+    <div>
+      <div class="vector-display" id="vectorDisplay"></div>
+      <div id="sliders"></div>
+      <div class="info-box">
+        En una GAN real, el espacio latente tiene 100 o más dimensiones. Cada una controla un aspecto de la muestra: edad, estilo del cabello, orientación del rostro en imágenes de caras.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMINIOS -->
+<section id="dominios">
+  <p class="section-sub">Paso 5 de 6</p>
+  <h2>Dominios de aplicación</h2>
+  <p class="section-desc">Las GANs no son una sola técnica: son una familia de arquitecturas adaptadas a cada tipo de dato. Imágenes, texto y audio requieren enfoques distintos.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active-violet" onclick="showTab('images',this)" id="tab-images">Imágenes</button>
+    <button class="tab-btn" onclick="showTab('text',this)"   id="tab-text">Texto</button>
+    <button class="tab-btn" onclick="showTab('audio',this)"  id="tab-audio">Audio</button>
+  </div>
+
+  <!-- IMAGENES -->
+  <div class="tab-panel active" id="panel-images">
+    <p>Las imágenes son datos continuos con estructura espacial regular, ideales para GANs convolucionales. Hoy existen caras sintéticas indistinguibles de fotografías reales.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name">DCGAN</span><span class="arch-desc">Arquitectura base con convoluciones. Genera imágenes coherentes.</span></div>
+        <div class="arch-item"><span class="arch-name">StyleGAN 2/3</span><span class="arch-desc">Control fino del estilo a distintas escalas. Imágenes fotorrealistas.</span></div>
+        <div class="arch-item"><span class="arch-name">Pix2Pix</span><span class="arch-desc">Transformación condicionada: boceto a fotografía, mapa a satélite.</span></div>
+        <div class="arch-item"><span class="arch-name">CycleGAN</span><span class="arch-desc">Transformación sin pares de entrenamiento: caballos a cebras.</span></div>
+        <div class="arch-item"><span class="arch-name">SRGAN</span><span class="arch-desc">Superresolución: aumentar la resolución con detalles plausibles.</span></div>
+      </div>
+      <div>
+        <h3>Desafíos</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">Inestabilidad durante el entrenamiento</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Colapso de modo: el generador produce variedad reducida</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Evaluación objetiva de la calidad visual</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="tab-panel" id="panel-text">
+    <p>El texto es discreto: no existe nada entre la palabra «gato» y la palabra «perro». Esto impide el flujo directo del gradiente, por lo que se necesitan técnicas especiales.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name blue">SeqGAN</span><span class="arch-desc">Usa Monte Carlo Tree Search para estimar el gradiente sobre secuencias discretas.</span></div>
+        <div class="arch-item"><span class="arch-name blue">TextGAN</span><span class="arch-desc">Trabaja en el espacio continuo de embeddings para permitir el flujo de gradiente.</span></div>
+        <div class="arch-item"><span class="arch-name blue">MaskGAN</span><span class="arch-desc">Rellena partes enmascaradas de un texto de forma coherente con el contexto.</span></div>
+        <div class="arch-item"><span class="arch-name blue">Trans-GAN</span><span class="arch-desc">Combina la arquitectura Transformer con el esquema adversarial.</span></div>
+      </div>
+      <div>
+        <h3>Desafíos</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La no diferenciabilidad de la selección de palabras discretas</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Dificultad para mantener coherencia a largo plazo</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Los LLMs modernos han superado a las GANs en la mayoría de tareas de texto</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <div class="tab-panel" id="panel-audio">
+    <p>El audio puede tratarse como forma de onda 1D o transformarse en un espectrograma 2D. La segunda aproximación reutiliza directamente las técnicas de imágenes.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Arquitecturas principales</h3>
+        <div class="arch-item"><span class="arch-name cyan">WaveGAN</span><span class="arch-desc">Opera directamente sobre la forma de onda con convoluciones 1D.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">MelGAN</span><span class="arch-desc">Genera espectrogramas Mel tratando el audio como una imagen 2D.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">HiFi-GAN</span><span class="arch-desc">Vocoder de alta fidelidad con múltiples discriminadores a distintas escalas.</span></div>
+        <div class="arch-item"><span class="arch-name cyan">MuseGAN</span><span class="arch-desc">Generación musical polifónica: coordina múltiples instrumentos.</span></div>
+      </div>
+      <div>
+        <h3>Desafíos</h3>
+        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La coherencia temporal: el oído detecta discontinuidades que el ojo ignora</span></div>
+        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Secuencias muy largas: 44.100 muestras por segundo en calidad CD</span></div>
+        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Artefactos sonoros como clicks y distorsión son muy perceptibles</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- CODIGO -->
 <section id="codigo">
-  <p class="section-sub">Paso 3 de 6</p>
-  <h2>Una GAN en 10 lineas de codigo</h2>
-  <p class="section-desc">Todo el concepto que acabas de aprender se puede escribir en Python de forma muy compacta. Cada linea tiene su equivalente en la metafora del falsificador.</p>
+  <p class="section-sub">Paso 6 de 6</p>
+  <h2>Una GAN en 10 líneas de código</h2>
+  <p class="section-desc">Todo el concepto que acabas de aprender se puede escribir en Python de forma muy compacta. Cada línea tiene su equivalente en la metáfora del falsificador.</p>
 
   <div class="callout tip">
-    <div class="callout-icon">&#128161;</div>
     <div class="callout-body">
-      <strong>Como leer el codigo:</strong> no necesitas entender la sintaxis de Python en detalle. Lee los comentarios grises de cada linea: explican exactamente que esta pasando
-      en terminos del ciclo GAN que ya conoces.
+      <strong>Cómo leer el código:</strong> no necesitas entender la sintaxis de Python en detalle. Lee los comentarios grises de cada línea: explican exactamente qué está pasando
+      en términos del ciclo GAN que ya conoces.
     </div>
   </div>
 
@@ -488,7 +641,7 @@
   <div class="schema">
     <div class="schema-box s-violet">
       Ruido z
-      <span class="schema-label">numeros aleatorios</span>
+      <span class="schema-label">números aleatorios</span>
     </div>
     <div class="schema-arrow">&#8594;</div>
     <div class="schema-box s-violet">
@@ -498,16 +651,16 @@
     <div class="schema-arrow">&#8594;</div>
     <div class="schema-box s-blue">
       Discriminador D
-      <span class="schema-label">evalua real/falso</span>
+      <span class="schema-label">evalúa real/falso</span>
     </div>
     <div class="schema-arrow">&#8594;</div>
     <div class="schema-box s-green">
-      Perdida
+      Pérdida
       <span class="schema-label">mide el error</span>
     </div>
     <div class="schema-arrow">&#8594;</div>
     <div class="schema-box s-amber">
-      Actualizacion
+      Actualización
       <span class="schema-label">mejora los pesos</span>
     </div>
   </div>
@@ -515,7 +668,7 @@
   <!-- Pestanas de codigo -->
   <div style="margin-top:1.75rem;">
     <div class="code-tabs">
-      <button class="code-tab active" onclick="showCode('full',this)">Codigo completo anotado</button>
+      <button class="code-tab active" onclick="showCode('full',this)">Código completo anotado</button>
       <button class="code-tab" onclick="showCode('gen',this)">Solo el Generador</button>
       <button class="code-tab" onclick="showCode('disc',this)">Solo el Discriminador</button>
       <button class="code-tab" onclick="showCode('loop',this)">Solo el bucle</button>
@@ -687,199 +840,36 @@
       <div class="console-dot" style="background:#ff5f56"></div>
       <div class="console-dot" style="background:#ffbd2e"></div>
       <div class="console-dot" style="background:#27c93f"></div>
-      <span style="margin-left:.5rem;">Salida de consola simulada &mdash; python gan_minimal.py</span>
-    </div>
+      <span style="margin-left:.5rem;">Salida de consola simulada &mdash; python gan_minimal.py</span>    </div>
     <div class="console-body">
-      <div class="c-dim">Descargando MNIST... 60.000 imagenes de entrenamiento</div>
+      <div class="c-dim">Descargando MNIST... 60.000 imágenes de entrenamiento</div>
       <div class="c-dim">Iniciando entrenamiento en CPU</div>
       <div style="margin:.5rem 0 .2rem; border-top: 1px solid #21262d;"></div>
-      <div><span class="c-dim">Epoca  1 |</span> <span class="c-b">D: 0.693</span> <span class="c-dim">|</span> <span class="c-v">G: 0.701</span> <span class="c-dim">&mdash; inicio: ambas redes partiendo de cero</span></div>
-      <div><span class="c-dim">Epoca  5 |</span> <span class="c-b">D: 0.541</span> <span class="c-dim">|</span> <span class="c-v">G: 1.124</span> <span class="c-dim">&mdash; D aprende rapido, G empieza a adaptarse</span></div>
-      <div><span class="c-dim">Epoca 10 |</span> <span class="c-b">D: 0.482</span> <span class="c-dim">|</span> <span class="c-v">G: 1.532</span> <span class="c-dim">&mdash; G sube su perdida al intentar enganar a D</span></div>
-      <div><span class="c-dim">Epoca 20 |</span> <span class="c-b">D: 0.431</span> <span class="c-dim">|</span> <span class="c-v">G: 1.201</span> <span class="c-dim">&mdash; ambas redes mejoran progresivamente</span></div>
-      <div><span class="c-dim">Epoca 30 |</span> <span class="c-b">D: 0.398</span> <span class="c-dim">|</span> <span class="c-v">G: 1.087</span> <span class="c-dim">&mdash; perdidas convergiendo hacia equilibrio</span></div>
-      <div><span class="c-dim">Epoca 40 |</span> <span class="c-b">D: 0.371</span> <span class="c-dim">|</span> <span class="c-v">G: 0.974</span></div>
-      <div><span class="c-dim">Epoca 50 |</span> <span class="c-b">D: 0.356</span> <span class="c-dim">|</span> <span class="c-v">G: 0.921</span> <span class="c-dim">&mdash; convergencia aceptable, imagenes coherentes</span></div>
+      <div><span class="c-dim">Época  1 |</span> <span class="c-b">D: 0.693</span> <span class="c-dim">|</span> <span class="c-v">G: 0.701</span> <span class="c-dim">&mdash; inicio: ambas redes partiendo de cero</span></div>
+      <div><span class="c-dim">Época  5 |</span> <span class="c-b">D: 0.541</span> <span class="c-dim">|</span> <span class="c-v">G: 1.124</span> <span class="c-dim">&mdash; D aprende rápido, G empieza a adaptarse</span></div>
+      <div><span class="c-dim">Época 10 |</span> <span class="c-b">D: 0.482</span> <span class="c-dim">|</span> <span class="c-v">G: 1.532</span> <span class="c-dim">&mdash; G sube su pérdida al intentar engañar a D</span></div>
+      <div><span class="c-dim">Época 20 |</span> <span class="c-b">D: 0.431</span> <span class="c-dim">|</span> <span class="c-v">G: 1.201</span> <span class="c-dim">&mdash; ambas redes mejoran progresivamente</span></div>
+      <div><span class="c-dim">Época 30 |</span> <span class="c-b">D: 0.398</span> <span class="c-dim">|</span> <span class="c-v">G: 1.087</span> <span class="c-dim">&mdash; pérdidas convergiendo hacia equilibrio</span></div>
+      <div><span class="c-dim">Época 40 |</span> <span class="c-b">D: 0.371</span> <span class="c-dim">|</span> <span class="c-v">G: 0.974</span></div>
+      <div><span class="c-dim">Época 50 |</span> <span class="c-b">D: 0.356</span> <span class="c-dim">|</span> <span class="c-v">G: 0.921</span> <span class="c-dim">&mdash; convergencia aceptable, imágenes coherentes</span></div>
       <div style="margin:.5rem 0 .2rem; border-top: 1px solid #21262d;"></div>
-      <div class="c-g">Entrenamiento completado en 4m 32s</div>
-      <div class="c-g">Imagenes guardadas en ./output/epoch_050.png</div>
-      <div class="c-a" style="margin-top:.5rem;">Interpretacion: D cercano a 0.5 = Discriminador adivinando al azar = buen equilibrio</div>
+      <div class="c-g">Entrenamiento completado en 4 min 32 s</div>
+      <div class="c-g">Imágenes guardadas en ./output/epoch_050.png</div>
+      <div class="c-a" style="margin-top:.5rem;">Interpretación: D cercano a 0,5 = Discriminador adivinando al azar = buen equilibrio</div>
     </div>
   </div>
 
   <div class="callout warn" style="margin-top:1.5rem;">
-    <div class="callout-icon">&#9888;</div>
     <div class="callout-body">
-      <strong>Recuerda:</strong> este codigo es didactico, no de produccion. Un entrenamiento real sobre datos complejos
-      (caras, arte, audio) requiere arquitecturas convolucionales mas profundas, GPUs y horas de computo.
-      El fichero <code>python/gan_images.py</code> del repositorio contiene la version DCGAN completa y ejecutable.
-    </div>
-  </div>
-</section>
-
-<!-- ENTRENAMIENTO -->
-<section id="entrenamiento">
-  <p class="section-sub">Paso 4 de 6</p>
-  <h2>Animacion del entrenamiento</h2>
-  <p class="section-desc">Reproduce el entrenamiento epoca a epoca. Observa como la calidad de las imagenes generadas mejora y como las curvas de perdida convergen hacia el equilibrio.</p>
-
-  <div class="callout info">
-    <div class="callout-icon">&#128202;</div>
-    <div class="callout-body">
-      <strong>Que mirar:</strong> al principio la perdida del Generador es alta (D lo detecta facilmente).
-      Con el tiempo ambas curvas se estabilizan y se aproximan. Cuando D tiene perdida ~0.5 significa que acierta solo por azar: el equilibrio se ha alcanzado.
-    </div>
-  </div>
-
-  <div class="training-wrap">
-    <div>
-      <div class="canvas-box">
-        <canvas id="trainCanvas" width="220" height="220"></canvas>
-        <div class="canvas-overlay" id="epochLabel">Epoca 1</div>
-      </div>
-      <div class="canvas-label">Muestra generada &mdash; Calidad: <span id="qualityPct">0%</span></div>
-      <div class="controls">
-        <button class="btn btn-outline btn-sm" onclick="resetAnim()">Reiniciar</button>
-        <button class="btn btn-primary btn-sm" id="playBtn" onclick="togglePlay()">Reproducir</button>
-      </div>
-      <div class="progress-wrap">
-        <input type="range" id="epochSlider" min="0" max="49" value="0" oninput="scrubTo(this.value)">
-        <div class="epoch-info"><span>Epoca 1</span><span>Epoca 50</span></div>
-      </div>
-    </div>
-
-    <div class="loss-chart-wrap">
-      <p>Curva de perdidas</p>
-      <svg id="lossChart" viewBox="0 0 300 180" style="width:100%;">
-        <line x1="30" y1="10" x2="30" y2="155" stroke="#334155" stroke-width="1"/>
-        <line x1="30" y1="155" x2="290" y2="155" stroke="#334155" stroke-width="1"/>
-        <text x="15" y="15" fill="#64748b" font-size="8" text-anchor="middle">Alto</text>
-        <text x="15" y="157" fill="#64748b" font-size="8" text-anchor="middle">Bajo</text>
-        <text x="160" y="174" fill="#64748b" font-size="8" text-anchor="middle">Epocas</text>
-        <polyline id="dLine" fill="none" stroke="#93c5fd" stroke-width="1.5" points=""/>
-        <polyline id="gLine" fill="none" stroke="#a78bfa" stroke-width="1.5" points=""/>
-      </svg>
-      <div class="loss-legend">
-        <span><span class="line-d"></span>Discriminador: <b id="dVal">-</b></span>
-        <span><span class="line-g"></span>Generador: <b id="gVal">-</b></span>
-      </div>
-      <div class="phase-label" id="phaseLabel"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ESPACIO LATENTE -->
-<section id="latente">
-  <p class="section-sub">Paso 5 de 6</p>
-  <h2>Explorador del espacio latente</h2>
-  <p class="section-desc">Mueve los controles para cambiar los parametros del vector de ruido z y observa como varia la muestra en tiempo real. Cada dimension controla un atributo diferente.</p>
-
-  <div class="callout tip">
-    <div class="callout-icon">&#128101;</div>
-    <div class="callout-body">
-      <strong>Conexion con la metafora:</strong> este vector z es exactamente el "papel en blanco" del que parte el falsificador.
-      Cada posicion del vector influye en como sera la muestra generada, igual que la calidad del papel influye en el resultado final del billete.
-    </div>
-  </div>
-
-  <div class="latent-wrap">
-    <div>
-      <div class="canvas-box">
-        <canvas id="latentCanvas" width="240" height="240"></canvas>
-        <div class="canvas-overlay">Muestra generada</div>
-      </div>
-      <div class="controls" style="margin-top:.75rem;">
-        <button class="btn btn-primary btn-sm" id="animBtn" onclick="toggleLatentAnim()">Animar recorrido</button>
-        <button class="btn btn-outline btn-sm" onclick="randomizeLatent()">Aleatorio</button>
-      </div>
-    </div>
-
-    <div>
-      <div class="vector-display" id="vectorDisplay"></div>
-      <div id="sliders"></div>
-      <div class="info-box">
-        En una GAN real, el espacio latente tiene 100 o mas dimensiones. Cada una controla un aspecto de la muestra: edad, estilo del cabello, orientacion del rostro en imagenes de caras.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DOMINIOS -->
-<section id="dominios">
-  <p class="section-sub">Paso 6 de 6</p>
-  <h2>Dominios de aplicacion</h2>
-  <p class="section-desc">Las GANs no son una sola tecnica: son una familia de arquitecturas adaptadas a cada tipo de dato. Imagenes, texto y audio requieren enfoques distintos.</p>
-
-  <div class="tabs">
-    <button class="tab-btn active-violet" onclick="showTab('images',this)" id="tab-images">Imagenes</button>
-    <button class="tab-btn" onclick="showTab('text',this)"   id="tab-text">Texto</button>
-    <button class="tab-btn" onclick="showTab('audio',this)"  id="tab-audio">Audio</button>
-  </div>
-
-  <!-- IMAGENES -->
-  <div class="tab-panel active" id="panel-images">
-    <p>Las imagenes son datos continuos con estructura espacial regular, ideales para GANs convolucionales. Hoy existen caras sinteticas indistinguibles de fotografias reales.</p>
-    <div class="grid-2">
-      <div>
-        <h3>Arquitecturas principales</h3>
-        <div class="arch-item"><span class="arch-name">DCGAN</span><span class="arch-desc">Arquitectura base con convoluciones. Genera imagenes coherentes.</span></div>
-        <div class="arch-item"><span class="arch-name">StyleGAN 2/3</span><span class="arch-desc">Control fino del estilo a distintas escalas. Imagenes fotorrealistas.</span></div>
-        <div class="arch-item"><span class="arch-name">Pix2Pix</span><span class="arch-desc">Transformacion condicionada: boceto a fotografia, mapa a satelite.</span></div>
-        <div class="arch-item"><span class="arch-name">CycleGAN</span><span class="arch-desc">Transformacion sin pares de entrenamiento: caballos a cebras.</span></div>
-        <div class="arch-item"><span class="arch-name">SRGAN</span><span class="arch-desc">Super-resolucion: aumentar la resolucion con detalles plausibles.</span></div>
-      </div>
-      <div>
-        <h3>Desafios</h3>
-        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">Inestabilidad durante el entrenamiento</span></div>
-        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Colapso de modo: el generador produce variedad reducida</span></div>
-        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Evaluacion objetiva de la calidad visual</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TEXTO -->
-  <div class="tab-panel" id="panel-text">
-    <p>El texto es discreto: no existe nada entre la palabra "gato" y la palabra "perro". Esto impide el flujo directo del gradiente, por lo que se necesitan tecnicas especiales.</p>
-    <div class="grid-2">
-      <div>
-        <h3>Arquitecturas principales</h3>
-        <div class="arch-item"><span class="arch-name blue">SeqGAN</span><span class="arch-desc">Usa Monte Carlo Tree Search para estimar el gradiente sobre secuencias discretas.</span></div>
-        <div class="arch-item"><span class="arch-name blue">TextGAN</span><span class="arch-desc">Trabaja en el espacio continuo de embeddings para permitir el flujo de gradiente.</span></div>
-        <div class="arch-item"><span class="arch-name blue">MaskGAN</span><span class="arch-desc">Rellena partes enmascaradas de un texto de forma coherente con el contexto.</span></div>
-        <div class="arch-item"><span class="arch-name blue">Trans-GAN</span><span class="arch-desc">Combina la arquitectura Transformer con el esquema adversarial.</span></div>
-      </div>
-      <div>
-        <h3>Desafios</h3>
-        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La no diferenciabilidad de la seleccion de palabras discretas</span></div>
-        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Dificultad para mantener coherencia a largo plazo</span></div>
-        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Los LLMs modernos han superado a las GANs en la mayoria de tareas de texto</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AUDIO -->
-  <div class="tab-panel" id="panel-audio">
-    <p>El audio puede tratarse como forma de onda 1D o transformarse en un espectrograma 2D. La segunda aproximacion reutiliza directamente las tecnicas de imagenes.</p>
-    <div class="grid-2">
-      <div>
-        <h3>Arquitecturas principales</h3>
-        <div class="arch-item"><span class="arch-name cyan">WaveGAN</span><span class="arch-desc">Opera directamente sobre la forma de onda con convoluciones 1D.</span></div>
-        <div class="arch-item"><span class="arch-name cyan">MelGAN</span><span class="arch-desc">Genera espectrogramas Mel tratando el audio como una imagen 2D.</span></div>
-        <div class="arch-item"><span class="arch-name cyan">HiFi-GAN</span><span class="arch-desc">Vocoder de alta fidelidad con multiples discriminadores a distintas escalas.</span></div>
-        <div class="arch-item"><span class="arch-name cyan">MuseGAN</span><span class="arch-desc">Generacion musical polifonica: coordina multiples instrumentos.</span></div>
-      </div>
-      <div>
-        <h3>Desafios</h3>
-        <div class="challenge-item"><span class="challenge-num">1</span><span class="arch-desc">La coherencia temporal: el oido detecta discontinuidades que el ojo ignora</span></div>
-        <div class="challenge-item"><span class="challenge-num">2</span><span class="arch-desc">Secuencias muy largas: 44.100 muestras por segundo en calidad CD</span></div>
-        <div class="challenge-item"><span class="challenge-num">3</span><span class="arch-desc">Artefactos sonoros como clicks y distorsion son muy perceptibles</span></div>
-      </div>
+      <strong>Recuerda:</strong> este código es didáctico, no de producción. Un entrenamiento real sobre datos complejos
+      (caras, arte, audio) requiere arquitecturas convolucionales más profundas, GPUs y horas de cómputo.
+      El fichero <code>python/gan_images.py</code> del repositorio contiene la versión DCGAN completa y ejecutable.
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Pildora formativa sobre Redes Generativas Adversarias</p>
+  <p>Píldora formativa sobre Redes Generativas Adversarias</p>
   <p style="margin-top:.3rem;">Basada en Goodfellow et al. (2014) &mdash; Generative Adversarial Nets</p>
 </footer>
 
@@ -898,28 +888,28 @@ function sr(seed) {
 const STEPS = [
   {
     title: "El Generador produce una muestra",
-    desc:  "El Generador toma un vector de numeros aleatorios (ruido) y lo transforma en una muestra. Al principio del entrenamiento, estas muestras son completamente aleatorias e incoherentes.",
+    desc:  "El Generador toma un vector de números aleatorios (ruido) y lo transforma en una muestra. Al principio del entrenamiento, estas muestras son completamente aleatorias e incoherentes.",
     meta:  "El falsificador toma papel en blanco y, sin haber visto billetes reales, intenta fabricar uno de memoria. El resultado inicial es un garabato sin sentido."
   },
   {
-    title: "El Discriminador evalua la muestra",
-    desc:  "El Discriminador recibe la muestra generada junto con muestras reales. Analiza las caracteristicas y produce un numero entre 0 (falso) y 1 (real). Su objetivo es clasificar correctamente.",
-    meta:  "El detective examina el billete bajo la lupa. Detecta facilmente el error: el papel es incorrecto, la tinta no tiene relieve, el holograma no existe."
+    title: "El Discriminador evalúa la muestra",
+    desc:  "El Discriminador recibe la muestra generada junto con muestras reales. Analiza las características y produce un número entre 0 (falso) y 1 (real). Su objetivo es clasificar correctamente.",
+    meta:  "El detective examina el billete bajo la lupa. Detecta fácilmente el error: el papel es incorrecto, la tinta no tiene relieve, el holograma no existe."
   },
   {
     title: "El Generador aprende del error",
-    desc:  "La senal de error del Discriminador se propaga hacia atras hasta el Generador. Este ajusta sus parametros para producir muestras mas dificiles de detectar en la siguiente iteracion.",
-    meta:  "El falsificador recibe la critica del detective: el papel es fino y no tiene marca de agua. En el siguiente intento usa papel mas grueso con textura."
+    desc:  "La señal de error del Discriminador se propaga hacia atrás hasta el Generador. Este ajusta sus parámetros para producir muestras más difíciles de detectar en la siguiente iteración.",
+    meta:  "El falsificador recibe la crítica del detective: el papel es fino y no tiene marca de agua. En el siguiente intento usa papel más grueso con textura."
   },
   {
-    title: "El Discriminador tambien mejora",
+    title: "El Discriminador también mejora",
     desc:  "Ahora el Discriminador entrena de nuevo con muestras reales y las nuevas muestras mejoradas del Generador. Se adapta para seguir distinguiendo correctamente.",
-    meta:  "El detective, al ver billetes de mejor calidad, se forma con expertos del banco central y aprende a detectar detalles mas sutiles."
+    meta:  "El detective, al ver billetes de mejor calidad, se forma con expertos del banco central y aprende a detectar detalles más sutiles."
   },
   {
     title: "El ciclo llega al equilibrio",
-    desc:  "El proceso se repite miles de veces. Al final, el Generador produce muestras tan buenas que el Discriminador acierta solo el 50% de las veces, es decir, acierta por azar.",
-    meta:  "Despues de anos de practica, los billetes del falsificador son perfectos. Ni el detector automatico ni el experto humano pueden distinguirlos."
+    desc:  "El proceso se repite miles de veces. Al final, el Generador produce muestras tan buenas que el Discriminador acierta solo el 50 % de las veces, es decir, acierta por azar.",
+    meta:  "Después de años de práctica, los billetes del falsificador son perfectos. Ni el detector automático ni el experto humano pueden distinguirlos."
   }
 ];
 
@@ -992,10 +982,10 @@ function updateTrainUI(fi) {
   document.getElementById("dVal").textContent        = f.dLoss.toFixed(3);
   document.getElementById("gVal").textContent        = f.gLoss.toFixed(3);
   // Phase label
-  const ph = f.quality < 0.3 ? "Fase inicial: el Generador produce ruido. El Discriminador detecta facilmente todos los falsos."
-           : f.quality < 0.6 ? "Fase media: el Generador capta patrones basicos. Las perdidas comienzan a estabilizarse."
-           : f.quality < 0.85? "Fase avanzada: las muestras son cada vez mas coherentes. La competencia es intensa."
-           :                   "Fase de convergencia: muestras de alta calidad. El Discriminador se acerca al 50%.";
+  const ph = f.quality < 0.3 ? "Fase inicial: el Generador produce ruido. El Discriminador detecta fácilmente todos los falsos."
+           : f.quality < 0.6 ? "Fase media: el Generador capta patrones básicos. Las pérdidas comienzan a estabilizarse."
+           : f.quality < 0.85? "Fase avanzada: las muestras son cada vez más coherentes. La competencia es intensa."
+           :                   "Fase de convergencia: muestras de alta calidad. El Discriminador se acerca al 50 %.";
   document.getElementById("phaseLabel").textContent = ph;
   // Loss lines
   const maxD = Math.max(...FRAMES.map(x=>x.dLoss));
@@ -1048,10 +1038,10 @@ updateTrainUI(0);
    LATENT SPACE EXPLORER
 ───────────────────────────────────────── */
 const PARAM_LABELS = [
-  "Dimension 1 — forma general",
-  "Dimension 2 — grosor del trazo",
-  "Dimension 3 — inclinacion",
-  "Dimension 4 — textura"
+  "Dimensión 1 — forma general",
+  "Dimensión 2 — grosor del trazo",
+  "Dimensión 3 — inclinación",
+  "Dimensión 4 — textura"
 ];
 
 let latentParams = [0, 0, 0, 0];
@@ -1114,7 +1104,7 @@ function toggleLatentAnim() {
     btn.textContent = "Animar recorrido";
     document.querySelectorAll(".latent-range").forEach(el => el.disabled = false);
   } else {
-    btn.textContent = "Detener animacion";
+    btn.textContent = "Detener animación";
     document.querySelectorAll(".latent-range").forEach(el => el.disabled = true);
     const step = (ts) => {
       latentT = ts / 1000;
