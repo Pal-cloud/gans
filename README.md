@@ -419,24 +419,7 @@ gans/
 
 ## 12. Referencias
 
-**Artículo original:**
-Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A., y Bengio, Y. (2014). Generative Adversarial Nets. *Advances in Neural Information Processing Systems*, 27.
-
-**Arquitecturas de referencia:**
-- Radford, A., Metz, L., y Chintala, S. (2015). Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. *ICLR 2016*.
-- Karras, T., Laine, S., y Aila, T. (2019). A Style-Based Generator Architecture for Generative Adversarial Networks. *CVPR 2019*.
-- Isola, P., Zhu, J.-Y., Zhou, T., y Efros, A. A. (2017). Image-to-Image Translation with Conditional Adversarial Networks. *CVPR 2017*.
-- Zhu, J.-Y., Park, T., Isola, P., y Efros, A. A. (2017). Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. *ICCV 2017*.
-
-**Audio:**
-- Donahue, C., McAuley, J., y Puckette, M. (2018). Adversarial Audio Synthesis. *ICLR 2019*.
-- Kumar, K. et al. (2019). MelGAN: Generative Adversarial Networks for Conditional Waveform Synthesis.
-- Kong, J., Kim, J., y Bae, J. (2020). HiFi-GAN: Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis.
-
-**Texto:**
-- Yu, L., Zhang, W., Wang, J., y Yu, Y. (2017). SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient. *AAAI 2017*.
-
-**Recursos adicionales:**
-- GAN Zoo (https://github.com/hindupuravinash/the-gan-zoo): catálogo de variantes de GANs publicadas.
-- Papers With Code — GANs (https://paperswithcode.com): implementaciones y benchmarks actualizados.
+- Curso-GANs: (https://github.com/nesmachnow/Curso-GANs) Repositorio de la Universidad de la República (Uruguay) con material teórico en español sobre fundamentos de redes neuronales generativas y resolución de problemas.
+- GANs_coursera: (https://github.com/denisparra/GANs_coursera) Material y notas para el seguimiento del reconocido curso de especialización en GANs de DeepLearning.AI.
+- gans-networks: (https://github.com/momartinm/gans-networks) Un proyecto introductorio que explica de forma sencilla qué son las Redes Generativas Antagónicas y su funcionamiento básico.
 - This Person Does Not Exist (https://thispersondoesnotexist.com): demostración pública de StyleGAN.
