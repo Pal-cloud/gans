@@ -310,9 +310,9 @@ Reglas clave de diseño de una DCGAN:
 
 ### Variantes importantes para imágenes
 
-**Pix2Pix:** GAN condicionada que transforma imágenes de un dominio a otro. Por ejemplo, convierte bocetos en fotografías o mapas en imágenes satélite.
+**Pix2Pix:** GAN condicionada que transforma imágenes de un dominio a otro. Por ejemplo, convierte bocetos en fotografías o mapas en imágenes satélite. Traduce una imagen de un tipo a otro, pero necesita un "par" de entrenamiento idéntico.
 
-**CycleGAN:** permite transformar imágenes entre dos dominios sin necesitar pares de imágenes de entrenamiento. Convierte fotografías de caballos en cebras, o verano en invierno.
+**CycleGAN:** permite transformar imágenes entre dos dominios sin necesitar pares de imágenes de entrenamiento. Convierte fotografías de caballos en cebras, o verano en invierno. Hace lo mismo que Pix2Pix, pero sin necesidad de pares. Aprende el concepto general.
 
 **StyleGAN2/3:** arquitectura de NVIDIA que permite controlar el estilo de imágenes a diferentes escalas de detalle. Produce los resultados más fotorrealistas conocidos.
 
