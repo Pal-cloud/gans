@@ -116,7 +116,7 @@ La carpeta `python/` contiene cuatro scripts con propósitos distintos. Todos co
 **Propósito:** implementación de referencia de la GAN original de Goodfellow et al. (2014). Usa exclusivamente capas completamente conectadas (lineales), sin convoluciones. Es el punto de partida más sencillo para entender el ciclo adversarial.
 
 **Qué hace al ejecutarse:**
-1. Descarga el dataset MNIST (60.000 imágenes de dígitos escritos a mano, 28 × 28 píxeles) la primera vez.
+1. Descarga el dataset [MNIST](http://yann.lecun.com/exdb/mnist/) (60.000 imágenes de dígitos escritos a mano, 28 × 28 píxeles) la primera vez.
 2. Entrena durante 50 épocas el Generador y el Discriminador de forma alternada (Una época = una vuelta completa al entrenamiento, de forma alterna, no entrenan a la vez, se turnan como en un juego).
 3. Guarda una rejilla de imágenes generadas cada 5 épocas en `./output_simple/`.
 4. Guarda la curva de pérdidas al finalizar en `./output_simple/loss_curve.png`.
@@ -138,7 +138,7 @@ python python/gan_simple.py
 **Propósito:** implementación de la arquitectura DCGAN (Deep Convolutional GAN) propuesta por Radford et al. (2015). Reemplaza las capas lineales por capas convolucionales, que explotan la estructura espacial de las imágenes. Es la versión más completa y la que produce mejores resultados visuales.
 
 **Qué hace al ejecutarse:**
-1. Descarga MNIST si no está ya disponible en `./data/`.
+1. Descarga [MNIST](http://yann.lecun.com/exdb/mnist/) si no está ya disponible en `./data/`.
 2. Inicializa los pesos siguiendo las recomendaciones del artículo original (distribución normal con media 0 y desviación estándar 0,02).
 3. Entrena durante 50 épocas alternando Discriminador y Generador por cada lote.
 4. Guarda imágenes de muestra cada 5 épocas en `./output_images/` (ficheros `dcgan_epoch_005.png`, etc.).
@@ -260,7 +260,7 @@ No es necesario modificar ningún parámetro: el script usará GPU si está disp
 
 ### Cuándo es suficiente la CPU
 
-Para los fines didácticos de este repositorio, la CPU es completamente suficiente. Los scripts `gan_simple.py` y `gan_images.py` entrenan sobre MNIST, un dataset pequeño y bien estudiado. Los tiempos de entrenamiento en CPU son asumibles en un ordenador moderno.
+Para los fines didácticos de este repositorio, la CPU es completamente suficiente. Los scripts `gan_simple.py` y `gan_images.py` entrenan sobre [MNIST](http://yann.lecun.com/exdb/mnist/), un dataset pequeño y bien estudiado. Los tiempos de entrenamiento en CPU son asumibles en un ordenador moderno.
 
 Si se quiere reducir el tiempo de espera sin GPU, basta con disminuir el número de épocas modificando la constante `NUM_EPOCHS` al inicio de cada script. Con 10 épocas se obtienen resultados ya visualmente comprensibles:
 
@@ -288,7 +288,7 @@ Si devuelve `False` en una máquina con GPU NVIDIA, es necesario instalar la ver
 
 ## 7. Uso en imágenes
 
-Las imágenes son el dominio donde las GANs han alcanzado resultados más espectaculares. El código en `python/gan_images.py` implementa una DCGAN que entrena sobre MNIST para generar dígitos escritos a mano.
+Las imágenes son el dominio donde las GANs han alcanzado resultados más espectaculares. El código en `python/gan_images.py` implementa una DCGAN que entrena sobre [MNIST](http://yann.lecun.com/exdb/mnist/) para generar dígitos escritos a mano.
 
 ### Por qué las imágenes se adaptan tan bien
 
@@ -419,6 +419,7 @@ gans/
 
 ## 12. Referencias
 
+- MNIST dataset (http://yann.lecun.com/exdb/mnist/): base de datos de dígitos escritos a mano de LeCun et al. Dataset estándar utilizado para entrenar y evaluar los scripts `gan_simple.py` y `gan_images.py`.
 - Curso-GANs: (https://github.com/nesmachnow/Curso-GANs) Repositorio de la Universidad de la República (Uruguay) con material teórico en español sobre fundamentos de redes neuronales generativas y resolución de problemas.
 - GANs_coursera: (https://github.com/denisparra/GANs_coursera) Material y notas para el seguimiento del reconocido curso de especialización en GANs de DeepLearning.AI.
 - gans-networks: (https://github.com/momartinm/gans-networks) Un proyecto introductorio que explica de forma sencilla qué son las Redes Generativas Antagónicas y su funcionamiento básico.
