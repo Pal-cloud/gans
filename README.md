@@ -117,7 +117,7 @@ La carpeta `python/` contiene cuatro scripts con propósitos distintos. Todos co
 
 **Qué hace al ejecutarse:**
 1. Descarga el dataset MNIST (60.000 imágenes de dígitos escritos a mano, 28 × 28 píxeles) la primera vez.
-2. Entrena durante 50 épocas el Generador y el Discriminador de forma alternada.
+2. Entrena durante 50 épocas el Generador y el Discriminador de forma alternada (Una época = una vuelta completa al entrenamiento, de forma alterna, no entrenan a la vez, se turnan como en un juego).
 3. Guarda una rejilla de imágenes generadas cada 5 épocas en `./output_simple/`.
 4. Guarda la curva de pérdidas al finalizar en `./output_simple/loss_curve.png`.
 
